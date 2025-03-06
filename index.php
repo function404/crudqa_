@@ -1,32 +1,33 @@
 <?php
-include('conexao.php');
-if(isset($_POST['usuario']) && isset($_POST['senha'])) {
+    include('src/include/conexao.php');
 
-    if(strlen($_POST['usuario']) == 0) {
-        echo "Usuario não informado";
-    } else if(strlen($_POST['senha']) == 0) {
-        echo "Preencha sua senha";
-    } else {
+    if(isset($_POST['usuario']) && isset($_POST['senha'])) {
 
-        $usuario = $mysqli->real_escape_string($_POST['usuario']);
-        $senha = $mysqli->real_escape_string($_POST['senha']);
-        $sql_code = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND senha = '$senha'";
-        $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
-        $quantidade = $sql_query->num_rows;
-
-        if($quantidade == 1) {
-            $usuario = $sql_query->fetch_assoc();
-            if(!isset($_SESSION)) {
-                session_start();
-            }
-            $_SESSION['id'] = $usuario['id'];
-            $_SESSION['nome'] = $usuario['nome'];
-            header("Location: painel.php");
+        if(strlen($_POST['usuario']) == 0) {
+            echo "Usuario não informado";
+        } else if(strlen($_POST['senha']) == 0) {
+            echo "Preencha sua senha";
         } else {
-            echo "Falha ao logar! E-mail ou senha incorretos";
+
+            $usuario = $mysqli->real_escape_string($_POST['usuario']);
+            $senha = $mysqli->real_escape_string($_POST['senha']);
+            $sql_code = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND senha = '$senha'";
+            $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: " . $mysqli->error);
+            $quantidade = $sql_query->num_rows;
+
+            if($quantidade == 1) {
+                $usuario = $sql_query->fetch_assoc();
+                if(!isset($_SESSION)) {
+                    session_start();
+                }
+                $_SESSION['id'] = $usuario['id'];
+                $_SESSION['nome'] = $usuario['nome'];
+                header("Location: src/screens/painel.php");
+            } else {
+                echo "Falha ao logar! E-mail ou senha incorretos";
+            }
         }
     }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
