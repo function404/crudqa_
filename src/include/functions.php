@@ -4,7 +4,7 @@
     *
     * @param string $data Dado a ser sanitizado
     * @return string Dado limpo e seguro
-    */
+   */
    function test_input($data) {
       // Remove espaços em branco no início e no fim da string
       $data = trim($data);
