@@ -13,7 +13,7 @@
       $data = stripcslashes($data);
 
       // Converte caracteres especiais para entidades HTML
-      $data = htmlspecialchars($data);
+      $data = htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
       return $data;
    }
 ?>

@@ -52,6 +52,17 @@ CREATE TABLE `produto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
+-- Tabela de Keys
+
+-- Esta tabela armazena as chaves de acesso para administração do sistema.
+-- Campos:
+--   idKey : Identificador único de cada chave (chave primária, auto_increment).
+--   key   : Chave de acesso (número inteiro de 6 dígitos).
+CREATE TABLE `keys` (
+  `idKey` int(11) NOT NULL,
+  `key` int(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 -- Inserção de Dados nas Tabelas
 
 -- Inserção de dados iniciais na tabela "usuario".
