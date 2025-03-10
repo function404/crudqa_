@@ -49,35 +49,35 @@ function notify($type, $message, $redirectUrl, $params = []) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    /**
     * Recebe e sanitiza os dados do formulário
-    * @var string $name     Nome do usuário
+    * @var string $nome     Nome do usuário
       * @var string $email    Email do usuário
       * @var string $telefone Telefone do usuário
       * @var string $password Senha do usuário
-      * @var int    $admin    Indica se o usuário será administrador (1) ou não (0)
+      * @var int    $administrador    Indica se o usuário será administrador (1) ou não (0)
       * @var string $key      Chave de administrador (opcional)
    */
-   $name     = test_input($_POST['name']);
+   $nome     = test_input($_POST['nome']);
    $email    = test_input($_POST['email']);
    $telefone = test_input($_POST['telefone']);
    $password = $_POST['password'];
-   $admin    = isset($_POST['admin']) ? 1 : 0;
+   $administrador    = isset($_POST['administrador']) ? 1 : 0;
    $key      = test_input($_POST['key']);
    
    /**
     * Vetor com os dados que serão repassados para repovoar os campos (exceto a senha)
    */
    $formValues = [
-      'name'     => $name,
+      'nome'     => $nome,
       'email'    => $email,
       'telefone' => $telefone,
-      'admin'    => $admin
+      'administrador'    => $administrador
    ];
    
    /**
     * Validação dos campos obrigatórios.
     * Se algum campo não for preenchido, exibe mensagem de erro e redireciona para a página de cadastro
     */ 
-   if (empty($name) || empty($email) || empty($password)) {
+   if (empty($nome) || empty($email) || empty($password)) {
       notify('error', 'Preencha todos os campos obrigatórios!', 'register', $formValues);
    }
    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -88,21 +88,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    }
    
    /*
-    * Verifica se o email já está cadastrado.
-    * Se estiver, exibe mensagem de erro e redireciona para a página de cadastro
-    * Caso contrário, prossegue com o cadastro.
+    * Verifica se o email já está cadastrado
     */ 
-   $stmt = $pdo->prepare("SELECT codigo FROM usuario WHERE email = :email");
+   $stmt = $pdo->prepare("SELECT id FROM usuario WHERE email = :email");
    $stmt->execute(['email' => $email]);
    if ($stmt->rowCount() > 0) {
       notify('error', 'Email já cadastrado!', 'register', $formValues);
+   }
+
+   /**
+    * Se o telefone foi informado, verifica se já existe
+   */
+   if (!empty($telefone)) {
+      $stmt = $pdo->prepare("SELECT id FROM usuario WHERE telefone = :telefone");
+      $stmt->execute(['telefone' => $telefone]);
+      if ($stmt->rowCount() > 0) {
+         notify('error', 'Telefone já cadastrado!', 'register', $formValues);
+      }
    }
    
    /**
     * Se o usuário optar por ser administrador, valida a chave de administrador.
     * Se a chave for inválida, exibe mensagem de erro e redireciona para a página de cadastro.
     */
-   if ($admin == 1) {
+   if ($administrador == 1) {
       if (empty($key)) {
          notify('error', 'Informe a chave de administrador!', 'register', $formValues);
       }
@@ -128,14 +137,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    /**
     * Insere o novo usuário na tabela.
     */ 
-   $stmt = $pdo->prepare("INSERT INTO usuario (codigo, nome, email, telefone, senha, administrador) VALUES (:codigo, :nome, :email, :telefone, :senha, :admin)");
+   $stmt = $pdo->prepare("INSERT INTO usuario (id, nome, email, telefone, senha, administrador) VALUES (:id, :nome, :email, :telefone, :senha, :administrador)");
    $stmt->execute([
-      'codigo' => null,
-      'nome' => $name,
+      'id' => null,
+      'nome' => $nome,
       'email' => $email,
       'telefone' => $telefone,
       'senha' => $senhaHash,
-      'admin'    => $admin
+      'administrador'    => $administrador
    ]);
    
    /**
@@ -166,14 +175,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       /**
        * Recupera os valores previamente informados, se existirem 
       */ 
-      $name_val     = isset($_GET['name']) ? htmlspecialchars($_GET['name']) : '';
+      $nome_val     = isset($_GET['nome']) ? htmlspecialchars($_GET['nome']) : '';
       $email_val    = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
       $telefone_val = isset($_GET['telefone']) ? htmlspecialchars($_GET['telefone']) : '';
-      $admin_checked = (isset($_GET['admin']) && $_GET['admin'] == 1) ? 'checked' : '';
+      $admin_checked = (isset($_GET['administrador']) && $_GET['administrador'] == 1) ? 'checked' : '';
    ?>
    <form action="register.php" method="POST">
-      <label for="name">*Nome:</label>
-      <input type="text" name="name" id="name" value="<?php echo $name_val; ?>" required>
+      <label for="nome">*Nome:</label>
+      <input type="text" name="nome" id="nome" value="<?php echo $nome_val; ?>" required>
       <br><br>
 
       <label for="email">*Email:</label>
@@ -189,7 +198,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <br><br>
 
       <label>
-         <input type="checkbox" name="admin" id="admin" <?php echo $admin_checked; ?>> Sou administrador
+         <input type="checkbox" name="administrador" id="administrador" <?php echo $admin_checked; ?>> Sou administrador
       </label>
       <br><br>
 
@@ -206,7 +215,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       /**
       * JavaScript para mostrar/ocultar o campo de chave conforme o checkbox de administrador
       */ 
-      document.getElementById('admin').addEventListener('change', function() {
+      document.getElementById('administrador').addEventListener('change', function() {
          var adminKeyDiv = document.getElementById('adminKeyDiv');
          adminKeyDiv.style.display = this.checked ? 'block' : 'none';
       });

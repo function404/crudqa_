@@ -18,17 +18,20 @@ USE crudqa;
 --   administrador: Indica se o usuário possui privilégios de administrador (0 = não, 1 = sim).
 --   created_at   : Data e hora em que o registro foi criado.
 --   updated_at   : Data e hora da última atualização do registro (atualizado automaticamente).
-CREATE TABLE `usuario` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `email` varchar(255) NOT NULL,
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL UNIQUE,
   `nome` varchar(255) NOT NULL,
-  `telefone` varchar(20) DEFAULT NULL,
+  `telefone` varchar(20) UNIQUE,
   `senha` varchar(255) NOT NULL,
   `administrador` tinyint(1) NOT NULL DEFAULT 0,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  CHECK (nome <> ''),
+  CHECK (email <> ''),
+  CHECK (senha <> '')
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 
 -- Tabela de Produtos
 
@@ -41,16 +44,16 @@ CREATE TABLE `usuario` (
 --   imagem     : Caminho ou URL da imagem do produto (em vez de armazenar a imagem em blob).
 --   created_at : Data e hora em que o registro foi criado.
 --   updated_at : Data e hora da última atualização do registro (atualizado automaticamente).
-CREATE TABLE `produto` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `produto` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
-  `descricao` text DEFAULT NULL,
+  `descricao` varchar(255) NOT NULL,
   `valor` decimal(10,2) NOT NULL,
   `imagem` mediumblob DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 
 -- Tabela de Keys
 
@@ -58,17 +61,8 @@ CREATE TABLE `produto` (
 -- Campos:
 --   idKey : Identificador único de cada chave (chave primária, auto_increment).
 --   key   : Chave de acesso (número inteiro de 6 dígitos).
-CREATE TABLE `keys` (
-  `idKey` int(11) NOT NULL,
-  `key` int(6) NOT NULL
+CREATE TABLE IF NOT EXISTS `keys` (
+  `idKey` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `key_value` int(6) NOT NULL UNIQUE,
+  PRIMARY KEY (`idKey`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Inserção de Dados nas Tabelas
-
--- Inserção de dados iniciais na tabela "usuario".
--- Cada linha representa um usuário com seus respectivos dados.
-INSERT INTO usuario (email, nome, telefone, senha, administrador) VALUES
-('felipe.gabriel@gmail.com', 'Felipe Gabriel', '4799999999', '123', 0),
-('lincoln.mezzalira@gmail.com', 'Lincoln', '4788888888', '123', 1),
-('joao.prestes@gmail.com', 'João', '4777777777', '123', 0),
-('yasmin.friedemann@gmail.com', 'Yasmin', '4555555555', '123', 0);
