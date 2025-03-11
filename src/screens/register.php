@@ -1,6 +1,16 @@
 <?php
+session_start();
 include('../include/conexao.php');
 include('../include/functions.php');
+
+
+/**
+ * Verifica se a sessão já foi iniciada; se não, inicia uma nova sessão.
+ */
+if (isset($_SESSION["id"])) {
+   header("Location: painel.php");
+   exit();
+}
 
 /**
  * Redireciona para a página indicada, passando o tipo de mensagem, a mensagem propriamente dita 
@@ -144,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       'email' => $email,
       'telefone' => $telefone,
       'senha' => $senhaHash,
-      'administrador'    => $administrador
+      'administrador' => $administrador
    ]);
    
    /**
@@ -157,6 +167,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="pt-br">
 <head>
    <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Cadastro</title>
 </head>
 <body>
@@ -207,10 +219,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          <label for="key">Chave de Administrador:</label>
          <input type="text" name="key" id="key">
       </div>
-      <br><br>
 
       <button type="submit">Cadastrar</button>
    </form>
+
+   <p>
+      Já tem uma conta? <a href="./login.php">Entrar</a>
+   </p>
+
    <script>
       /**
       * JavaScript para mostrar/ocultar o campo de chave conforme o checkbox de administrador
@@ -220,5 +236,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          adminKeyDiv.style.display = this.checked ? 'block' : 'none';
       });
    </script>
-</body>
-</html>
+<?php
+   include('../components/footer.php');
+?>

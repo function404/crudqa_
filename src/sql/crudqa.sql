@@ -16,8 +16,8 @@ USE crudqa;
 --   telefone     : Número de telefone do usuário (campo opcional).
 --   senha        : Senha do usuário (idealmente deve ser armazenada de forma criptografada).
 --   administrador: Indica se o usuário possui privilégios de administrador (0 = não, 1 = sim).
---   created_at   : Data e hora em que o registro foi criado.
---   updated_at   : Data e hora da última atualização do registro (atualizado automaticamente).
+--   criado_as   : Data e hora em que o registro foi criado.
+--   atualizado_as   : Data e hora da última atualização do registro (atualizado automaticamente).
 CREATE TABLE IF NOT EXISTS `usuario` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL UNIQUE,
@@ -25,8 +25,8 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `telefone` varchar(20) UNIQUE,
   `senha` varchar(255) NOT NULL,
   `administrador` tinyint(1) NOT NULL DEFAULT 0,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `criado_as` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `atualizado_as` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   CHECK (nome <> ''),
   CHECK (email <> ''),
@@ -42,16 +42,16 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 --   descricao  : Descrição detalhada do produto (permite mais de 255 caracteres).
 --   valor      : Preço do produto, utilizando DECIMAL para precisão em valores monetários.
 --   imagem     : Caminho ou URL da imagem do produto (em vez de armazenar a imagem em blob).
---   created_at : Data e hora em que o registro foi criado.
---   updated_at : Data e hora da última atualização do registro (atualizado automaticamente).
+--   criado_as : Data e hora em que o registro foi criado.
+--   atualizado_as : Data e hora da última atualização do registro (atualizado automaticamente).
 CREATE TABLE IF NOT EXISTS `produto` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
   `descricao` varchar(255) NOT NULL,
   `valor` decimal(10,2) NOT NULL,
   `imagem` mediumblob DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `criado_as` timestamp NOT NULL DEFAULT current_timestamp(),
+  `atualizado_as` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

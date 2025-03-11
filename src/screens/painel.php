@@ -15,5 +15,5 @@
          <a href="../include/logout.php">Sair</a>
       </p>
 <?php
-   include('src/components/footer.php');
+   include('../components/footer.php');
 ?>
