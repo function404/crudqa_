@@ -132,8 +132,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
        * Verifica se a chave existe na tabela "keys"
        * Se não existir, exibe mensagem de erro e redireciona para a página de cadastro.
        */ 
-      $stmt = $pdo->prepare("SELECT * FROM `keys` WHERE `key` = :key");
-      $stmt->execute(['key' => $key]);
+      $stmt = $pdo->prepare("SELECT * FROM `keys` WHERE `key_value` = :key_value");
+      $stmt->execute(['key_value' => $key]);
       if ($stmt->rowCount() == 0) {
          notify('error', 'Chave de administrador inválida!', 'register', $formValues);
       }

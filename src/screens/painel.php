@@ -10,7 +10,14 @@
       <title>Painel</title>
    </head>
    <body>
-      Bem vindo ao Painel, .
+      Bem vindo ao Painel, 
+      <?php 
+         // mostra o nome do usuário logado.
+         echo $_SESSION["nome"];
+
+         // se for administrador, mostra a informação "(Administrador)".
+         echo $_SESSION["administrador"] ? " (Administrador)" : "";
+      ?>.
       <p>
          <a href="../include/logout.php">Sair</a>
       </p>
