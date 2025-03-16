@@ -52,7 +52,11 @@ CREATE TABLE IF NOT EXISTS `produto` (
   `imagem` mediumblob DEFAULT NULL,
   `criado_as` timestamp NOT NULL DEFAULT current_timestamp(),
   `atualizado_as` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  CHECK (nome <> ''),
+  CHECK (descricao <> ''),
+  CHECK (valor <> ''),
+    CHECK (imagem <> '')
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Tabela de Keys

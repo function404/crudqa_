@@ -3,9 +3,9 @@ session_start();
 include('../include/conexao.php');
 include('../include/functions.php');
 
-
 /**
- * Verifica se a sessão já foi iniciada; se não, inicia uma nova sessão.
+ * Verifica se a sessão já foi iniciada
+ * Se não, inicia uma nova sessão.
  */
 if (isset($_SESSION["id"])) {
    header("Location: painel.php");
@@ -59,12 +59,6 @@ function notify($type, $message, $redirectUrl, $params = []) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    /**
     * Recebe e sanitiza os dados do formulário
-    * @var string $nome     Nome do usuário
-      * @var string $email    Email do usuário
-      * @var string $telefone Telefone do usuário
-      * @var string $password Senha do usuário
-      * @var int    $administrador    Indica se o usuário será administrador (1) ou não (0)
-      * @var string $key      Chave de administrador (opcional)
    */
    $nome     = test_input($_POST['nome']);
    $email    = test_input($_POST['email']);
@@ -100,9 +94,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    /*
     * Verifica se o email já está cadastrado
     */ 
-   $stmt = $pdo->prepare("SELECT id FROM usuario WHERE email = :email");
-   $stmt->execute(['email' => $email]);
-   if ($stmt->rowCount() > 0) {
+   $sql = $pdo->prepare("SELECT id FROM usuario WHERE email = :email");
+   $sql->execute(['email' => $email]);
+   if ($sql->rowCount() > 0) {
       notify('error', 'Email já cadastrado!', 'register', $formValues);
    }
 
@@ -110,9 +104,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     * Se o telefone foi informado, verifica se já existe
    */
    if (!empty($telefone)) {
-      $stmt = $pdo->prepare("SELECT id FROM usuario WHERE telefone = :telefone");
-      $stmt->execute(['telefone' => $telefone]);
-      if ($stmt->rowCount() > 0) {
+      $sql = $pdo->prepare("SELECT id FROM usuario WHERE telefone = :telefone");
+      $sql->execute(['telefone' => $telefone]);
+      if ($sql->rowCount() > 0) {
          notify('error', 'Telefone já cadastrado!', 'register', $formValues);
       }
    }
@@ -132,11 +126,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
        * Verifica se a chave existe na tabela "keys"
        * Se não existir, exibe mensagem de erro e redireciona para a página de cadastro.
        */ 
-      $stmt = $pdo->prepare("SELECT * FROM `keys` WHERE `key_value` = :key_value");
-      $stmt->execute(['key_value' => $key]);
-      if ($stmt->rowCount() == 0) {
+      $sql = $pdo->prepare("SELECT * FROM `keys` WHERE `key_value` = :key_value");
+      $sql->execute(['key_value' => $key]);
+
+      if ($sql->rowCount() == 0) {
          notify('error', 'Chave de administrador inválida!', 'register', $formValues);
       }
+
+      /**
+       * Delete a chave após ser usada
+      */
+      $sql = $pdo->prepare('DELETE FROM `keys` WHERE `key_value` = :key_value');
+      $sql->execute(['key_value' => $key]);
    }
    
    /**
@@ -147,8 +148,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    /**
     * Insere o novo usuário na tabela.
     */ 
-   $stmt = $pdo->prepare("INSERT INTO usuario (id, nome, email, telefone, senha, administrador) VALUES (:id, :nome, :email, :telefone, :senha, :administrador)");
-   $stmt->execute([
+   $sql = $pdo->prepare("INSERT INTO usuario (id, nome, email, telefone, senha, administrador) VALUES (:id, :nome, :email, :telefone, :senha, :administrador)");
+   $sql->execute([
       'id' => null,
       'nome' => $nome,
       'email' => $email,
