@@ -47,7 +47,7 @@
             <th>Nome</th>
             <th>Email</th>
             <th>Telefone</th>
-            <th>Criação</th>
+            <th>Administrador</th>
             <th>Atualizado</th>
             <th>Ações</th>
         </tr>
@@ -57,6 +57,7 @@
                 <td><?= $usuario['nome'] ?></td>
                 <td><?= $usuario['email'] ?></td>
                 <td><?= $usuario['telefone'] ?></td>
+                <td><?= $usuario['administrador']?></td>
                 <td><?= $usuario['criado_as']?></td>
                 <td><?= $usuario['atualizado_as']?></td>
                 <td>
