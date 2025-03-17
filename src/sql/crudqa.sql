@@ -25,8 +25,8 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `telefone` varchar(20) UNIQUE,
   `senha` varchar(255) NOT NULL,
   `administrador` tinyint(1) NOT NULL DEFAULT 0,
-  `criado_as` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `atualizado_as` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `criado_as` timestamp NOT NULL DEFAULT current_timestamp(),
+  `atualizado_as` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),
   CHECK (nome <> ''),
   CHECK (email <> ''),
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `produto` (
   CHECK (nome <> ''),
   CHECK (descricao <> ''),
   CHECK (valor <> ''),
-    CHECK (imagem <> '')
+  CHECK (imagem <> '')
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Tabela de Keys
@@ -70,3 +70,7 @@ CREATE TABLE IF NOT EXISTS `keys` (
   `key_value` int(6) NOT NULL UNIQUE,
   PRIMARY KEY (`idKey`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Insere na tabela de Keys
+INSERT INTO `keys`(`idKey`, `key_value`) VALUES 
+(1,'123456');
