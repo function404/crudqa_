@@ -173,62 +173,75 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap" rel="stylesheet">
+   <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="./public/boxIcon-white.png" id="favicon">
    <title>Cadastro</title>
 </head>
+<?php 
+   $nome_val = isset($_GET['nome']) ? htmlspecialchars($_GET['nome']) : '';
+   $email_val = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
+   $telefone_val = isset($_GET['telefone']) ? htmlspecialchars($_GET['telefone']) : '';
+   $admin_checked = (isset($_GET['administrador']) && $_GET['administrador'] == 1) ? 'checked' : '';
+?>
 <body>
    <main class="main-form"> 
       <section class="container-form">
          <section class="left-form">
-            <div class="first-midfont-register">
+            <div class="first-midfont-login">
                <p>Seja muito</p>
             </div>
-            <div class="welcolme-register">
+
+            <div class="welcolme-login">
                <p>Bem-vindo</p>
             </div>
+
             <div class="separator"></div>
-            <div class="last-midfont-register">
+
+            <div class="last-midfont-login">
                <p>Sistema de gerenciamento de estoque</p>
             </div>
          </section>
+
          <section class="right-form">
-            <div class="title-register">
+            <div class="title-login">
                <p>Cadastro de Usuário</p>
             </div>
-            <div class="form-register">
-               <?php
-                  if (isset($_GET['error_'])) {
-                     echo "<p class='message' style='color: red; margin-top:15px; font-size: 1vw;'>" . htmlspecialchars($_GET['message']) . "</p>";
-                  }
-                  if (isset($_GET['success_'])) {
-                     echo "<p class='message' style='color: green; margin-top:15px; font-size: 1vw;'>" . htmlspecialchars($_GET['message']) . "</p>";
-                  }
-                  $nome_val = isset($_GET['nome']) ? htmlspecialchars($_GET['nome']) : '';
-                  $email_val = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
-                  $telefone_val = isset($_GET['telefone']) ? htmlspecialchars($_GET['telefone']) : '';
-                  $admin_checked = (isset($_GET['administrador']) && $_GET['administrador'] == 1) ? 'checked' : '';
-               ?>
+
+            <div class="form-login">
                <form action="register.php" method="POST">
                   <label for="nome">Nome:</label>
                   <input type="text" name="nome" id="nome" placeholder="Digite o seu nome" value="<?php echo $nome_val; ?>" required>
+
                   <label for="email">Email:</label>
                   <input type="email" name="email" id="email" placeholder="Digite o seu email" value="<?php echo $email_val; ?>" required>
+
                   <label for="telefone">Telefone:</label>
                   <input type="text" name="telefone" id="telefone" placeholder="Digite o seu telefone" value="<?php echo $telefone_val; ?>">
+
                   <label for="password">Senha:</label>
                   <input type="password" name="password" id="password" placeholder="Digite a sua senha" required>
 
-                  <div class="keyadmin-register">
+                  <div class="keyadmin">
                      <input type="checkbox" name="administrador" id="administrador" <?php echo $admin_checked; ?>>
                      <label>Sou um administrador</label>
                   </div>
-                  <div id="adminKeyDiv" style="display: <?php echo ($admin_checked ? 'flex' : 'none'); ?>;">
+                  <div id="adminKeyDiv" style="display: none;">
                      <label for="key">Chave de Administrador:</label>
                      <input type="text" name="key" id="key" placeholder="Digite a chave de administrador">
                   </div>
                   
+                  <?php
+                     if (isset($_GET['error_'])) {
+                        echo "<p style='color: red; margin-top:15px; font-size: 1vw;'>" . htmlspecialchars($_GET['message']) . "</p>";
+                     }
+                     if (isset($_GET['success_'])) {
+                        echo "<p style='color: red; margin-top:15px; font-size: 1vw;'>" . htmlspecialchars($_GET['message']) . "</p>";
+                     }
+                  ?>
+
                   <button type="submit">Cadastrar</button>
                </form>
             </div>
+
             <div class="register-login">
                <p>
                   <a href="./login.php">Já tem uma conta? Entrar</a>
@@ -243,3 +256,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          adminKeyDiv.style.display = this.checked ? 'block' : 'none';
       });
    </script>
+<body>
+</html>

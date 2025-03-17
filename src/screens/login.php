@@ -75,9 +75,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    <title>Login</title>
 </head>
 <?php
-$email_val = isset($_GET["email"]) ? htmlspecialchars($_GET["email"]) : "";
+   $email_val = isset($_GET["email"]) ? htmlspecialchars($_GET["email"]) : "";
+   $senha_val = isset($_GET["senha"]) ? htmlspecialchars($_GET["senha"]) : "";
 ?>
-
 <body>
    <main class="main-form"> 
       <section class="container-form">
@@ -109,19 +109,20 @@ $email_val = isset($_GET["email"]) ? htmlspecialchars($_GET["email"]) : "";
                   
                   <label for="password">Senha:</label>
                   <input type="password" placeholder="Digite a sua senha" name="password" id="password" required>
-      
+                  
+                  <?php
+                     if (isset($_GET["error_"])) {
+                        echo "<p style='color: red; margin-top:15px; font-size: 1vw;'>" . htmlspecialchars($_GET["message"]) . "</p>";
+                     }
+                     if (isset($_GET["success_"])) {
+                        echo "<p style='color: red; margin-top:15px; font-size: 1vw;'>" . htmlspecialchars($_GET["message"]) . "</p>";
+                     }
+                  ?>
                   <button type="submit">Entrar</button>
                </form>
             </div>
    
-            <?php
-            if (isset($_GET["error_"])) {
-               echo "<p class='message' style='color: red; margin-top:15px; font-size: 1vw;'>" . htmlspecialchars($_GET["message"]) . "</p>";
-            }
-            if (isset($_GET["success_"])) {
-               echo "<p class='message' style='color: green; margin-top:15px; font-size: 1vw;'>" . htmlspecialchars($_GET["message"]) . "</p>";
-            }
-            ?>
+
 
             <div class="register-login">
                <p>
