@@ -208,16 +208,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <div class="form-login">
                <form action="register.php" method="POST">
-                  <label for="nome">Nome:</label>
+                  <label for="nome">*Nome:</label>
                   <input type="text" name="nome" id="nome" placeholder="Digite o seu nome" value="<?php echo $nome_val; ?>" required>
 
-                  <label for="email">Email:</label>
+                  <label for="email">*Email:</label>
                   <input type="email" name="email" id="email" placeholder="Digite o seu email" value="<?php echo $email_val; ?>" required>
 
                   <label for="telefone">Telefone:</label>
                   <input type="text" name="telefone" id="telefone" placeholder="Digite o seu telefone" value="<?php echo $telefone_val; ?>">
 
-                  <label for="password">Senha:</label>
+                  <label for="password">*Senha:</label>
                   <input type="password" name="password" id="password" placeholder="Digite a sua senha" required>
 
                   <div class="keyadmin">

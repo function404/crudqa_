@@ -104,10 +104,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div class="form-login">
                <form action="login.php" method="POST">
-                  <label for="email">Email:</label>
+                  <label for="email">*Email:</label>
                   <input type="email" placeholder="Digite o seu email" name="email" id="email" value="<?php echo $email_val; ?>" required>
                   
-                  <label for="password">Senha:</label>
+                  <label for="password">*Senha:</label>
                   <input type="password" placeholder="Digite a sua senha" name="password" id="password" required>
                   
                   <?php
