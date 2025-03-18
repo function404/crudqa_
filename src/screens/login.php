@@ -1,56 +1,63 @@
 <?php
-session_start();
-include('../include/conexao.php');
-include('../include/functions.php');
+   session_start();
+   include('../include/conexao.php');
+   include('../include/functions.php');
 
-/**
- * Verifica se a sessão já foi iniciada; se não, inicia uma nova sessão.
- */
-if (isset($_SESSION["id"])) {
-   header("Location: painel.php");
-   exit();
-}
-
-/**
- * Função para notificar e redirecionar com mensagem e, opcionalmente, parâmetros para repovoar o formulário.
- */
-function notify($type, $message, $redirectUrl, $params = []) {
-   $params[$type.'_'] = 1;
-   $params['message'] = $message;
-   header("Location: " . $redirectUrl . ".php?" . http_build_query($params));
-   exit();
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-   $email    = test_input($_POST["email"]);
-   $password = $_POST["password"]; // não aplica sanitização para a senha
-   $formValues = [ "email" => $email ];
-
-   // Validação dos campos obrigatórios
-   if (empty($email) || empty($password)) {
-      notify("error", "Preencha todos os campos!", "login", $formValues);
-   }
-   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      notify("error", "Formato de email inválido!", "login", $formValues);
+   /**
+    * Verifica se a sessão já foi iniciada
+    * Se não, inicia uma nova sessão.
+    */
+   if (isset($_SESSION["id"])) {
+      header("Location: painel.php");
+      exit();
    }
 
-   // Busca o usuário pelo email
-   $stmt = $pdo->prepare("SELECT * FROM usuario WHERE email = :email");
-   $stmt->execute(["email" => $email]);
-   $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-   if (!$user || !password_verify($password, $user["senha"])) {
-      notify("error", "Email ou senha incorretos!", "login", $formValues);
+   /**
+    * Função para notificar e redirecionar com mensagem e, opcionalmente, parâmetros para repovoar o formulário.
+    */
+   function notify($type, $message, $redirectUrl, $params = []) {
+      $params[$type.'_'] = 1;
+      $params['message'] = $message;
+      header("Location: " . $redirectUrl . ".php?" . http_build_query($params));
+      exit();
    }
 
-   // Login realizado com sucesso, inicializa as variáveis de sessão
-   $_SESSION["id"] = $user["id"];
-   $_SESSION["nome"] = $user["nome"];
-   $_SESSION["email"] = $user["email"];
-   $_SESSION["administrador"] = $user["administrador"];
+   if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      $email    = test_input($_POST["email"]);
+      $password = $_POST["password"]; // não aplica sanitização para a senha
+      $formValues = ["email" => $email];
 
-   notify("success", "Login realizado com sucesso!", "painel", []);
-}
+      /**
+       * Validação dos campos obrigatórios
+       */ 
+      if (empty($email) || empty($password)) {
+         notify("error", "Preencha todos os campos!", "login", $formValues);
+      }
+      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+         notify("error", "Formato de email inválido!", "login", $formValues);
+      }
+
+      /**
+       * Busca o usuário pelo email
+       */ 
+      $stmt = $pdo->prepare("SELECT * FROM usuario WHERE email = :email");
+      $stmt->execute(["email" => $email]);
+      $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+      if (!$user || !password_verify($password, $user["senha"])) {
+         notify("error", "Email ou senha incorretos!", "login", $formValues);
+      }
+
+      /**
+       * Login realizado com sucesso, inicializa as variáveis de sessão
+       */ 
+      $_SESSION["id"] = $user["id"];
+      $_SESSION["nome"] = $user["nome"];
+      $_SESSION["email"] = $user["email"];
+      $_SESSION["administrador"] = $user["administrador"];
+
+      notify("success", "Login realizado com sucesso!", "painel", []);
+   }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
