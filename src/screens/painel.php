@@ -1,13 +1,19 @@
 <?php
+   include('../components/header.php');
    include('../include/protect.php');
    include('../include/conexao.php');
+   
 
-   echo "Bem-vindo, " . $_SESSION["nome"];
+   echo "<div class='container-painel'>";
+   echo "<h1 style='font-size: 3vw;'>";	
+   echo "Bem-vindo, " .  $_SESSION["nome"] . "</h1>";
    echo $_SESSION["administrador"] ? " (Administrador)" : "";
    echo "<br><br>";
 
    if ($_SESSION["administrador"]) {
-      echo "<p><a href='admin.php'>Painel de Administração</a></p>";
+      echo "<div class='button-admin'>";
+         echo "<a href='admin.php'>Painel de Administração</a>";
+      echo "</div>";
    }
 
    /**
@@ -20,16 +26,16 @@
     * Verifica se existem produtos cadastrados 
     */
    if ($produtos) {
-      echo "<h2>Produtos Disponíveis</h2>";
-      echo "<div style='display: flex; flex-wrap: wrap; gap: 20px;'>";
+      echo "<h2 style='text-align: center; font-size: 2rem; margin-bottom: 10px'>Produtos Disponíveis</h2>";
+      echo "<div style='display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;'>";
       foreach ($produtos as $produto) {
          /**
           * Exibe cada produto com nome, descrição, valor e imagem
           */
-         echo "<div style='border: 1px solid #000; padding: 10px; width: 250px;'>";
-            echo "<h3>{$produto['nome']}</h3>";
-            echo "<p><strong>Descrição:</strong> {$produto['descricao']}</p>";
-            echo "<p><strong>Valor:</strong> R$ " . number_format($produto['valor'], 2, ',', '.') . "</p>";
+         echo "<div class='card-products'>";
+            echo "<h3 style='font-size: 2rem; font-weight: 800; margin-bottom: 5px;'>{$produto['nome']}</h3>";
+            echo "<p style='font-size: 1.3rem;'>Descrição: {$produto['descricao']}</p>";
+            echo "<p style='font-size: 1.3rem; margin-bottom: 10px'>Valor: R$ " . number_format($produto['valor'], 2, ',', '.') . "</p>";
             /**
              * Se o produto tiver imagem, exibe a imagem 
              */
@@ -45,10 +51,13 @@
        */
       echo "<p>Nenhum produto disponível.</p>";
    }
+   echo "</div>";
 ?>
 
-<p>
-    <a href="../include/logout.php">Sair</a>
-</p>
+<div class='sair'>
+   <p>
+      <a href="../include/logout.php">Sair</a>
+   </p>
+</div>
 
 <?php include('../components/footer.php'); ?>
