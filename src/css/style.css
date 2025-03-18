@@ -13,11 +13,137 @@
     font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-style: normal;
- }
+}
 
- body {
+body {
     background-color: #e6ecfa;
- }
+}
+
+/**
+    * Header CSS
+    * 
+    * Contém todo o CSS da Header.
+    * 
+*/
+
+header {
+    background-color: rgb(56, 182, 255);
+    color: rgb(255, 255, 255);
+    padding: 10px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);  
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+}
+
+header .logo img {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+}
+
+.TextLogo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-style: normal;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+/**
+    * Painel CSS
+    * 
+    * Contém todo o CSS da Painel.
+    * 
+*/
+
+.container-painel {
+    margin: 5rem 10rem;
+}
+
+.button-admin{
+    display: flex;
+    justify-content: center;
+}
+
+.button-admin a{
+    width: 30%;
+    padding: 5px 15px;
+    background-color: rgb(56, 182, 255);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 30px;
+    text-align: center;
+    font-size: 1.5vw;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    transition: ease-in-out 0.3s;
+    text-decoration: none;
+}
+
+.button-admin a:hover {
+    background-color: rgb(15, 104, 177);
+    transition: ease-in-out 0.3s;
+}
+
+.card-products {
+    border: 5px solid rgb(255, 255, 255); 
+    border-radius: 25px;
+    color: rgb(255, 255, 255);
+    padding: 10px; 
+    width: 400px;
+    margin: 10px;
+    background-color: rgb(56, 182, 255);
+}
+
+.card-products img {
+    width: 100%;
+    height: 200px;
+    border: 2px solid rgb(255, 255, 255); 
+    object-fit: cover;
+}
+
+.sair {
+    display: flex;
+    justify-content: center;
+}
+
+.sair p{
+    width: 5%;
+    padding: 5px 15px;
+    background-color: rgb(255, 56, 56);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 30px;
+    text-align: center;
+    font-size: 1.2vw;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: ease-in-out 0.3s;
+    text-decoration: none;
+}
+
+.sair p:hover {
+    background-color: rgb(177, 15, 15);
+    transition: ease-in-out 0.3s;
+}
+
+.sair a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+/**
+   * Login/Register CSS
+   * 
+   * Contém todo o CSS da página de Login e Register.
+   * 
+*/
 
  .main-form {
     width: 100%;
@@ -46,7 +172,7 @@ footer {
     align-items: center;
     margin: auto;
     width: 70%;
-    height: 75%;
+    height: 80%;
 }
 
 .main-form .container-form .left-form,
@@ -63,12 +189,19 @@ footer {
 .main-form .container-form .left-form{
     width: 100%;
     height: 100%;
-    background-color: #38b6ff;
+    background-color: rgb(56, 182, 255);
+    text-align: center;
+}
+
+.main-form .container-form .right-form{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
     text-align: center;
 }
 
 .main-form .container-form .left-form p {
-    color: white;
+    color: rgb(255, 255, 255);
     font-size: 1.2rem;
 }
 
@@ -78,29 +211,14 @@ footer {
     font-style: normal;
 }
 
-.main-form .container-form .left-form .first-midfont-register p{
-    font-size: 1.5vw;
-    font-family: "Poppins", sans-serif;
-    font-style: normal;
-}
-
 .main-form .container-form .left-form .separator {
     width: 6rem;
     height: 3px;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     justify-self: center;
 }
 
 .main-form .container-form .left-form .welcolme-login p{
-    font-size: 3.5vw;
-    font-family: "Poppins", sans-serif;
-    font-weight: 800;
-    font-style: normal;
-    letter-spacing: 11px;
-    text-transform: uppercase;
-}
-
-.main-form .container-form .left-form .welcolme-register p{
     font-size: 3.5vw;
     font-family: "Poppins", sans-serif;
     font-weight: 800;
@@ -117,37 +235,13 @@ footer {
     margin-top: 1rem;
 }
 
-.main-form .container-form .left-form .last-midfont-register p{
-    font-size: 1vw;
-    font-family: "Poppins", sans-serif;
-    font-weight: bold;
-    font-style: normal;
-    margin-top: 1rem;
-}
-
-.main-form .container-form .right-form{
-    width: 100%;
-    height: 100%;
-    background-color: #FFFFFF;
-}
-
 .main-form .container-form .right-form .register-login p{
     margin-top: 1rem;
     font-size: 1vw;
 }
 
-.main-form .container-form .right-form .register-register p{
-    margin-top: 1rem;
-    font-size: 1vw;
-}
-
 .main-form .container-form .right-form .register-login a{
-    color: #38b6ff;
-    text-decoration: none;
-}
-
-.main-form .container-form .right-form .register-register a{
-    color: #38b6ff;
+    color: rgb(56, 182, 255);
     text-decoration: none;
 }
 
@@ -155,31 +249,16 @@ footer {
     font-family: "Poppins", sans-serif;
     font-weight: 800;
     font-style: normal;
-    color: #38b6ff;
-    font-size: 2vw;
-}
-
-.main-form .container-form .right-form .title-register p{
-    font-family: "Poppins", sans-serif;
-    font-weight: 800;
-    font-style: normal;
-    color: #38b6ff;
+    color: rgb(56, 182, 255);
     font-size: 2vw;
 }
 
 .main-form .container-form .right-form .form-login {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
     width: 22vw;
-}
-
-.main-form .container-form .right-form .form-register {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 .main-form .container-form .right-form .form-login label {
@@ -191,69 +270,33 @@ footer {
     margin-top: 1rem;
 }
 
-.main-form .container-form .right-form .form-register label {
-    font-size: 1.1vw;
-    width: 100%;
-    color: black;
-    text-align: left; 
-    display: block; 
-    margin-top: 1rem;
-}
-
 .main-form .container-form .right-form .form-login input{
     width: 100%;
     height: 2.5rem;
-    background-color: #eeecec;
-    border-left: 5px solid #38b6ff;
-    border-right: 1px solid #ffffff;
-    border-top: 1px solid #ffffff;
-    border-bottom: 1px solid #ffffff;
+    background-color: rgb(238, 236, 236);
+    border-left: 5px solid rgb(56, 182, 255);
+    border-right: 1px solid rgb(255, 255, 255);
+    border-top: 1px solid rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(255, 255, 255);
     padding: 0 1rem;
     font-size: 1.2rem;
-}
-
-.main-form .container-form .right-form .form-register input{
-    width: 23vw;
-    height: 4.4dvh;
-    background-color: #eeecec;
-    border-left: 5px solid #38b6ff;
-    border-right: 1px solid #ffffff;
-    border-top: 1px solid #ffffff;
-    border-bottom: 1px solid #ffffff;
-    padding: 0 1rem;
-    font-size: 1vw;
 }
 
 .main-form .container-form .right-form .form-login input:focus{
     height: 2.5rem;
-    background-color: #eeecec;
+    background-color: rgb(238, 236, 236);
     outline: none;
-    border-left: 5px solid #0f68b1;
+    border-left: 5px solid rgb(15, 104, 177);
     padding: 0 1rem;
     font-size: 1.2rem;
 }
 
-.main-form .container-form .right-form .form-register input:focus{
-    height: 4.4dvh;
-    background-color: #eeecec;
-    outline: none;
-    border-left: 5px solid #0f68b1;
-    padding: 0 1rem;
-    font-size: 1vw;
-}
-
-.main-form .container-form .right-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
 .main-form .container-form .right-form button {
-    width: 100%;
-    height: 5dvh;
-    background-color: #38b6ff;
-    color: white;
+    width: 50%;
+    /* height: 5dvh; */
+    padding: 5px 0;
+    background-color: rgb(56, 182, 255);
+    color: rgb(255, 255, 255);
     border: none;
     border-radius: 30px;
     font-size: 1.4vw;
@@ -263,23 +306,30 @@ footer {
 }
 
 .main-form .container-form .right-form button:hover {
-    background-color: #0f68b1;
+    background-color: rgb(15, 104, 177);
     transition: ease-in-out 0.3s;
 }
 
-.main-form .container-form .right-form .form-register .keyadmin-register{
+.main-form .container-form .right-form .form-login .keyadmin {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 10px;
 }
 
-.main-form .container-form .right-form .form-register .keyadmin-register input{
+.main-form .container-form .right-form .form-login .keyadmin label { 
+    margin-top: 0;
+}
+
+.main-form .container-form .right-form .form-login .keyadmin input[type="checkbox"] {
     width: 20px;
-    margin-top: 10px;
     margin-right: 10px;
 }
 
 @media (max-width: 1120px) {
     .main-form .container-form .right-form .title-login p{
-        font-size: 2.8vw;
+        font-size: 2.5vw;
     }
 
     .main-form .container-form .right-form .register-login p{
@@ -287,32 +337,15 @@ footer {
         font-size: 1.5vw;
     }
 
-    .main-form .container-form .right-form .form-register label{
-        font-size: 1.7vw;
+    .main-form .container-form .right-form .form-login label{
+        font-size: 1.1rem;
     }
 
     .main-form .container-form .right-form .form-login input{
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
 
     .main-form .container-form .left-form .last-midfont-login p{
-        font-size: 1.2vw;
-    }
-
-    .main-form .container-form .right-form .title-register p{
-        font-size: 2.8vw;
-    }
-
-    .main-form .container-form .right-form .register-register p{
-        margin-top: 1rem;
-        font-size: 1.5vw;
-    }
-
-    .main-form .container-form .right-form .form-register input{
-        font-size: 1rem;
-    }
-
-    .main-form .container-form .left-form .last-midfont-register p{
         font-size: 1.2vw;
     }
 
@@ -356,27 +389,11 @@ footer {
         letter-spacing: 11px;
         text-transform: uppercase;
     }
-    .main-form .container-form .left-form .separator,
-    .main-form .container-form .left-form .last-midfont-register{
-        display: none;
-    }
-
-    .main-form .container-form .left-form .first-midfont-register p{
-        font-size: 2.5vw;
-        font-family: "Poppins", sans-serif;
-        font-style: normal;
-    }
-    
-    .main-form .container-form .left-form .welcolme-register p{
-        font-size: 6vw;
-        font-family: "Poppins", sans-serif;
-        font-weight: 800;
-        font-style: normal;
-        letter-spacing: 11px;
-        text-transform: uppercase;
-    }
     .main-form .container-form .right-form {
         height: 80dvh;
+    }
+    .main-form .container-form .right-form .form-login {
+        align-items: center;
     }
     .main-form .container-form .right-form .title-login p{
         font-size: 5vw;
@@ -385,26 +402,10 @@ footer {
         font-size: 1rem;
         width: 45vw;
     }
-    .main-form .container-form .right-form .title-register p{
-        font-size: 4vw;
-        margin-top: 30px;
-    }
-
-    .main-form .container-form .right-form .form-register label{
-        font-size: 2.5vw;
-    }
-
-    .main-form .container-form .right-form .form-register input{
-        font-size: 2.5vw;
-        width: 38vw;
-    }
     .main-form .container-form .right-form button {
         font-size: 2.7vw;
     }
     .main-form .container-form .right-form .register-login p{
-        font-size: 2vw;
-    }
-    .main-form .container-form .right-form .register-register p{
         font-size: 2vw;
     }
     .main-form .container-form .right-form button {
@@ -413,32 +414,22 @@ footer {
 }
 
 @media (max-width: 550px) {
-    .main-form .container-form .left-form .first-midfont-register,
     .main-form .container-form .left-form .first-midfont-login p{
         font-size: 3vw;
     }
-    
-    .main-form .container-form .left-form .welcolme-register,
     .main-form .container-form .left-form .welcolme-login p{
         font-size: 7vw;
     }
-
-    .main-form .container-form .right-form .title-register
     .main-form .container-form .right-form .title-login p{
         font-size: 5.5vw;
     }
-
-    .main-form .container-form .right-form .form-register,
     .main-form .container-form .right-form .form-login label{
         font-size: 3.5vw;
     }
-
-    .main-form .container-form .right-form .form-register,
     .main-form .container-form .right-form .form-register input{
         font-size: 3vw;
         width: 55vw;
     }
-
     .main-form .container-form .right-form button {
         font-size: 4vw;
         width: 100%;
