@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    $nomeUsuario = test_input($_POST['nomeUsuario']);
    $email = test_input($_POST['email']);
    $telefone = test_input($_POST['telefone']);
-   $password = $_POST['password'];
+   $password = $_POST['senha'];
    $administrador = isset($_POST['administrador']) ? 1 : 0;
    $key = test_input($_POST['key']);
    
@@ -178,24 +178,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    <title>Cadastro</title>
 </head>
 <?php
-      /**
-       * Exibe mensagem de erro ou sucesso, se houver 
-      */ 
-      if (isset($_GET['error_'])) {
-         echo "<p class='message' style='color: red;'>" . htmlspecialchars($_GET['message']) . "</p>";
-      }
-      if (isset($_GET['success_'])) {
-         echo "<p class='message' style='color: green;'>" . htmlspecialchars($_GET['message']) . "</p>";
-      }
-      
-      /**
-       * Recupera os valores previamente informados, se existirem 
-      */ 
-      $nomeUsuario_val = isset($_GET['nomeUsuario']) ? htmlspecialchars($_GET['nomeUsuario']) : '';
-      $email_val = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
-      $telefone_val = isset($_GET['telefone']) ? htmlspecialchars($_GET['telefone']) : '';
-      $admin_checked = (isset($_GET['administrador']) && $_GET['administrador'] == 1) ? 'checked' : '';
-   ?>
+   /**
+    * Recupera os valores previamente informados, se existirem 
+   */ 
+   $nomeUsuario_val = isset($_GET['nomeUsuario']) ? htmlspecialchars($_GET['nomeUsuario']) : '';
+   $email_val = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
+   $telefone_val = isset($_GET['telefone']) ? htmlspecialchars($_GET['telefone']) : '';
+   $admin_checked = (isset($_GET['administrador']) && $_GET['administrador'] == 1) ? 'checked' : '';
+?>
 <body>
    <main class="main-form"> 
       <section class="container-form">
@@ -222,8 +212,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <div class="form-login">
                <form action="register.php" method="POST">
-                  <label for="nome">*Nome:</label>
-                  <input type="text" name="nome" id="nome" placeholder="Digite o seu nome" value="<?php echo $nome_val; ?>" required>
+                  <label for="nomeUsuario">*Nome:</label>
+                  <input type="text" name="nomeUsuario" id="nomeUsuario" placeholder="Digite o seu nome" value="<?php echo $nomeUsuario_val; ?>" required>
 
                   <label for="email">*Email:</label>
                   <input type="email" name="email" id="email" placeholder="Digite o seu email" value="<?php echo $email_val; ?>" required>
@@ -231,8 +221,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   <label for="telefone">Telefone:</label>
                   <input type="text" name="telefone" id="telefone" placeholder="Digite o seu telefone" value="<?php echo $telefone_val; ?>">
 
-                  <label for="password">*Senha:</label>
-                  <input type="password" name="password" id="password" placeholder="Digite a sua senha" required>
+                  <label for="senha">*Senha:</label>
+                  <input type="password" name="senha" id="senha" placeholder="Digite a sua senha" required>
 
                   <div class="keyadmin">
                      <input type="checkbox" name="administrador" id="administrador" <?php echo $admin_checked; ?>>
