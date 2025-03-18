@@ -5,30 +5,29 @@ CREATE DATABASE IF NOT EXISTS crudqa CHARACTER SET utf8mb4 COLLATE utf8mb4_unico
 -- Seleciona o banco de dados "crudqa" para as operações seguintes.
 USE crudqa;
 
-
 -- Tabela de Usuários
 
 -- Esta tabela armazena as informações dos usuários do sistema.
 -- Campos:
---   id           : Identificador único de cada usuário (chave primária, auto_increment).
---   email        : E-mail do usuário (único, para evitar duplicidade).
---   nome         : Nome completo do usuário.
---   telefone     : Número de telefone do usuário (campo opcional).
---   senha        : Senha do usuário (idealmente deve ser armazenada de forma criptografada).
---   administrador: Indica se o usuário possui privilégios de administrador (0 = não, 1 = sim).
---   criado_as   : Data e hora em que o registro foi criado.
---   atualizado_as   : Data e hora da última atualização do registro (atualizado automaticamente).
+--   idUsuario     : Identificador único de cada usuário (chave primária, auto_increment).
+--   email         : E-mail do usuário (único, para evitar duplicidade).
+--   nomeUsuario   : Nome completo do usuário.
+--   telefone      : Número de telefone do usuário (campo opcional).
+--   senha         : Senha do usuário (idealmente deve ser armazenada de forma criptografada).
+--   administrador : Indica se o usuário possui privilégios de administrador (0 = não, 1 = sim).
+--   criado_as     : Data e hora em que o registro foi criado.
+--   atualizado_as : Data e hora da última atualização do registro (atualizado automaticamente).
 CREATE TABLE IF NOT EXISTS `usuario` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idUsuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL UNIQUE,
-  `nome` varchar(255) NOT NULL,
+  `nomeUsuario` varchar(255) NOT NULL,
   `telefone` varchar(20) UNIQUE,
   `senha` varchar(255) NOT NULL,
   `administrador` tinyint(1) NOT NULL DEFAULT 0,
   `criado_as` timestamp NOT NULL DEFAULT current_timestamp(),
   `atualizado_as` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`id`),
-  CHECK (nome <> ''),
+  PRIMARY KEY (`idUsuario`),
+  CHECK (nomeUsuario <> ''),
   CHECK (email <> ''),
   CHECK (senha <> '')
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -37,25 +36,27 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 
 -- Esta tabela armazena as informações dos produtos do sistema.
 -- Campos:
---   id         : Identificador único de cada produto (chave primária, auto_increment).
---   nome       : Nome do produto.
---   descricao  : Descrição detalhada do produto (permite mais de 255 caracteres).
---   valor      : Preço do produto, utilizando DECIMAL para precisão em valores monetários.
---   imagem     : Caminho ou URL da imagem do produto (em vez de armazenar a imagem em blob).
---   criado_as : Data e hora em que o registro foi criado.
+--   idProduto     : Identificador único de cada produto (chave primária, auto_increment).
+--   nomeProduto   : Nome do produto.
+--   descricao     : Descrição detalhada do produto (permite mais de 255 caracteres).
+--   valor         : Preço do produto, utilizando DECIMAL para precisão em valores monetários.
+--   imagem        : Caminho ou URL da imagem do produto (em vez de armazenar a imagem em blob).
+--   criado_as     : Data e hora em que o registro foi criado.
 --   atualizado_as : Data e hora da última atualização do registro (atualizado automaticamente).
 CREATE TABLE IF NOT EXISTS `produto` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nome` varchar(255) NOT NULL,
+  `idProduto` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nomeProduto` varchar(255) NOT NULL,
   `descricao` varchar(255) NOT NULL,
   `valor` decimal(10,2) NOT NULL,
   `imagem` mediumblob DEFAULT NULL,
+  `quantidade` int(5) DEFAULT NULL,
   `criado_as` timestamp NOT NULL DEFAULT current_timestamp(),
   `atualizado_as` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`id`),
-  CHECK (nome <> ''),
+  PRIMARY KEY (`idProduto`),
+  CHECK (nomeProduto <> ''),
   CHECK (descricao <> ''),
   CHECK (valor <> ''),
+  CHECK (quantidade <> ''),
   CHECK (imagem <> '')
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

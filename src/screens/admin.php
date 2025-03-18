@@ -48,21 +48,22 @@
             <th>Email</th>
             <th>Telefone</th>
             <th>Administrador</th>
+            <th>Criado</th>
             <th>Atualizado</th>
             <th>Ações</th>
         </tr>
         <?php foreach ($usuarios as $usuario): ?>
             <tr>
-                <td><?= $usuario['id'] ?></td>
-                <td><?= $usuario['nome'] ?></td>
+                <td><?= $usuario['idUsuario'] ?></td>
+                <td><?= $usuario['nomeUsuario'] ?></td>
                 <td><?= $usuario['email'] ?></td>
                 <td><?= $usuario['telefone'] ?></td>
                 <td><?= $usuario['administrador']?></td>
                 <td><?= $usuario['criado_as']?></td>
                 <td><?= $usuario['atualizado_as']?></td>
                 <td>
-                    <a href="editarUsuario.php?id=<?= $usuario['id'] ?>">Editar</a> |
-                    <a href="excluirUsuario.php?id=<?= $usuario['id'] ?>" onclick="return confirm('Tem certeza?')">Excluir</a>
+                    <a href="editarUsuario.php?idUsuario=<?= $usuario['idUsuario'] ?>">Editar</a> |
+                    <a href="excluirUsuario.php?idUsuario=<?= $usuario['idUsuario'] ?>" onclick="return confirm('Tem certeza?')">Excluir</a>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -81,27 +82,29 @@
             <th>Nome</th>
             <th>Descrição</th>
             <th>Valor</th>
+            <th>Quantidade</th>
             <th>Imagem</th>
-            <th>Criação</th>
+            <th>Criado</th>
             <th>Atualizado</th>
             <th>Ações</th>
         </tr>
         <?php foreach ($produtos as $produto): ?>
             <tr>
-                <td><?= $produto['id'] ?></td>
-                <td><?= $produto['nome'] ?></td>
+                <td><?= $produto['idProduto'] ?></td>
+                <td><?= $produto['nomeProduto'] ?></td>
                 <td><?= $produto['descricao'] ?></td>
                 <td>R$ <?= number_format($produto['valor'], 2, ',', '.') ?></td>
+                <td><?= $produto['quantidade'] ?></td>
                 <td>
                     <?php if ($produto['imagem']): ?>
                         <img src="data:image/jpeg;base64,<?= base64_encode($produto['imagem']) ?>" width="50">
                     <?php endif; ?>
                 </td>
-                <td><?= $usuario['criado_as']?></td>
-                <td><?= $usuario['atualizado_as']?></td>
+                <td><?= $produto['criado_as']?></td>
+                <td><?= $produto['atualizado_as']?></td>
                 <td>
-                    <a href="editarProduto.php?id=<?= $produto['id'] ?>">Editar</a> |
-                    <a href="excluirProduto.php?id=<?= $produto['id'] ?>" onclick="return confirm('Tem certeza?')">Excluir</a>
+                    <a href="editarProduto.php?idProduto=<?= $produto['idProduto'] ?>">Editar</a> |
+                    <a href="excluirProduto.php?idProduto=<?= $produto['idProduto'] ?>" onclick="return confirm('Tem certeza?')">Excluir</a>
                 </td>
             </tr>
         <?php endforeach; ?>

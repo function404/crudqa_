@@ -7,7 +7,7 @@ include('../include/functions.php');
  * Verifica se a sessão já foi iniciada
  * Se não, inicia uma nova sessão.
  */
-if (isset($_SESSION["id"])) {
+if (isset($_SESSION["idUsuario"])) {
    header("Location: painel.php");
    exit();
 }
@@ -60,28 +60,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    /**
     * Recebe e sanitiza os dados do formulário
    */
-   $nome     = test_input($_POST['nome']);
-   $email    = test_input($_POST['email']);
+   $nomeUsuario = test_input($_POST['nomeUsuario']);
+   $email = test_input($_POST['email']);
    $telefone = test_input($_POST['telefone']);
    $password = $_POST['password'];
-   $administrador    = isset($_POST['administrador']) ? 1 : 0;
-   $key      = test_input($_POST['key']);
+   $administrador = isset($_POST['administrador']) ? 1 : 0;
+   $key = test_input($_POST['key']);
    
    /**
     * Vetor com os dados que serão repassados para repovoar os campos (exceto a senha)
    */
    $formValues = [
-      'nome'     => $nome,
-      'email'    => $email,
+      'nomeUsuario' => $nomeUsuario,
+      'email' => $email,
       'telefone' => $telefone,
-      'administrador'    => $administrador
+      'administrador' => $administrador
    ];
    
    /**
     * Validação dos campos obrigatórios.
     * Se algum campo não for preenchido, exibe mensagem de erro e redireciona para a página de cadastro
     */ 
-   if (empty($nome) || empty($email) || empty($password)) {
+   if (empty($nomeUsuario) || empty($email) || empty($password)) {
       notify('error', 'Preencha todos os campos obrigatórios!', 'register', $formValues);
    }
    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    /*
     * Verifica se o email já está cadastrado
     */ 
-   $sql = $pdo->prepare("SELECT id FROM usuario WHERE email = :email");
+   $sql = $pdo->prepare("SELECT idUsuario FROM usuario WHERE email = :email");
    $sql->execute(['email' => $email]);
    if ($sql->rowCount() > 0) {
       notify('error', 'Email já cadastrado!', 'register', $formValues);
@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     * Se o telefone foi informado, verifica se já existe
    */
    if (!empty($telefone)) {
-      $sql = $pdo->prepare("SELECT id FROM usuario WHERE telefone = :telefone");
+      $sql = $pdo->prepare("SELECT idUsuario FROM usuario WHERE telefone = :telefone");
       $sql->execute(['telefone' => $telefone]);
       if ($sql->rowCount() > 0) {
          notify('error', 'Telefone já cadastrado!', 'register', $formValues);
@@ -148,10 +148,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    /**
     * Insere o novo usuário na tabela.
     */ 
-   $sql = $pdo->prepare("INSERT INTO usuario (id, nome, email, telefone, senha, administrador) VALUES (:id, :nome, :email, :telefone, :senha, :administrador)");
+   $sql = $pdo->prepare("INSERT INTO usuario (idUsuario, nomeUsuario, email, telefone, senha, administrador) VALUES (:idUsuario, :nomeUsuario, :email, :telefone, :senha, :administrador)");
    $sql->execute([
-      'id' => null,
-      'nome' => $nome,
+      'idUsuario' => null,
+      'nomeUsuario' => $nomeUsuario,
       'email' => $email,
       'telefone' => $telefone,
       'senha' => $senhaHash,
@@ -177,12 +177,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="./public/boxIcon-white.png" id="favicon">
    <title>Cadastro</title>
 </head>
-<?php 
-   $nome_val = isset($_GET['nome']) ? htmlspecialchars($_GET['nome']) : '';
-   $email_val = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
-   $telefone_val = isset($_GET['telefone']) ? htmlspecialchars($_GET['telefone']) : '';
-   $admin_checked = (isset($_GET['administrador']) && $_GET['administrador'] == 1) ? 'checked' : '';
-?>
+<?php
+      /**
+       * Exibe mensagem de erro ou sucesso, se houver 
+      */ 
+      if (isset($_GET['error_'])) {
+         echo "<p class='message' style='color: red;'>" . htmlspecialchars($_GET['message']) . "</p>";
+      }
+      if (isset($_GET['success_'])) {
+         echo "<p class='message' style='color: green;'>" . htmlspecialchars($_GET['message']) . "</p>";
+      }
+      
+      /**
+       * Recupera os valores previamente informados, se existirem 
+      */ 
+      $nomeUsuario_val = isset($_GET['nomeUsuario']) ? htmlspecialchars($_GET['nomeUsuario']) : '';
+      $email_val = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
+      $telefone_val = isset($_GET['telefone']) ? htmlspecialchars($_GET['telefone']) : '';
+      $admin_checked = (isset($_GET['administrador']) && $_GET['administrador'] == 1) ? 'checked' : '';
+   ?>
 <body>
    <main class="main-form"> 
       <section class="container-form">

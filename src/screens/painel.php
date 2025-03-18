@@ -6,7 +6,7 @@
 
    echo "<div class='container-painel'>";
    echo "<h1 style='font-size: 3vw;'>";	
-   echo "Bem-vindo, " .  $_SESSION["nome"] . "</h1>";
+   echo "Bem-vindo, " .  $_SESSION["nomeUsuario"] . "</h1>";
    echo $_SESSION["administrador"] ? " (Administrador)" : "";
    echo "<br><br>";
 
@@ -19,7 +19,7 @@
    /**
     * Consulta os produtos disponíveis no banco de dados para listar  produtos para usuários comuns
     */ 
-   $sql = $pdo->query("SELECT nome, descricao, valor, imagem FROM produto WHERE imagem IS NOT NULL");
+   $sql = $pdo->query("SELECT nomeProduto, descricao, valor, quantidade, imagem FROM produto WHERE imagem IS NOT NULL");
    $produtos = $sql->fetchAll(PDO::FETCH_ASSOC);
 
    /**
@@ -35,6 +35,7 @@
          echo "<div class='card-products'>";
             echo "<h3 style='font-size: 2rem; font-weight: 800; margin-bottom: 5px;'>{$produto['nome']}</h3>";
             echo "<p style='font-size: 1.3rem;'>Descrição: {$produto['descricao']}</p>";
+            echo "<p style='font-size: 1.3rem;><strong>Quantidade: {$produto['quantidade']}</strong></p>";
             echo "<p style='font-size: 1.3rem; margin-bottom: 10px'>Valor: R$ " . number_format($produto['valor'], 2, ',', '.') . "</p>";
             /**
              * Se o produto tiver imagem, exibe a imagem 
