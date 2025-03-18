@@ -12,15 +12,18 @@
     }
 
     /**
-     * Recupera o ID do produto a ser excluído através do parâmetro da URL
-     */ 
-    $id = $_GET['id'];
+     * Recupera o idProduto do produto e verifica se ele foi passado corretamente
+     */
+    $idProduto = isset($_GET['idProduto']) ? $_GET['idProduto'] : null;
+    if (!$idProduto) {
+        notify('error', 'ID do produto não especificado.', 'admin');
+    }
 
     /**
      * Prepara e executa a consulta para excluir o produto do banco de dados
      */ 
-    $sql = $pdo->prepare("DELETE FROM produto WHERE id = ?");
-    $sql->execute([$id]);
+    $sql = $pdo->prepare("DELETE FROM produto WHERE idProduto = ?");
+    $sql->execute([$idProduto]);
 
     /**
      * Após a exclusão, redireciona para a página de administração

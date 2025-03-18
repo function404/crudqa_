@@ -7,7 +7,7 @@
     * Verifica se a sessão já foi iniciada
     * Se não, inicia uma nova sessão.
     */
-   if (isset($_SESSION["id"])) {
+   if (isset($_SESSION["idUsuario"])) {
       header("Location: painel.php");
       exit();
    }
@@ -51,8 +51,8 @@
       /**
        * Login realizado com sucesso, inicializa as variáveis de sessão
        */ 
-      $_SESSION["id"] = $user["id"];
-      $_SESSION["nome"] = $user["nome"];
+      $_SESSION["idUsuario"] = $user["idUsuario"];
+      $_SESSION["nomeUsuario"] = $user["nomeUsuario"];
       $_SESSION["email"] = $user["email"];
       $_SESSION["administrador"] = $user["administrador"];
 

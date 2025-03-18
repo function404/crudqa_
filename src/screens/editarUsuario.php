@@ -12,15 +12,18 @@
     }
 
     /**
-     * Recupera o ID do produto a ser editado através do parâmetro da URL
+     * Recupera o idUsuario do produto e verifica se ele foi passado corretamente
      */
-    $id = $_GET['id'];
+    $idUsuario = isset($_GET['idUsuario']) ? $_GET['idUsuario'] : null;
+    if (!$idUsuario) {
+        notify('error', 'ID do produto não especificado.', 'admin');
+    }
 
     /**
      * Recupera os dados do usuário no banco
      */ 
-    $sql = $pdo->prepare("SELECT * FROM usuario WHERE id = ?");
-    $sql->execute([$id]);
+    $sql = $pdo->prepare("SELECT * FROM usuario WHERE idUsuario = ?");
+    $sql->execute([$idUsuario]);
     /**
      * Armazena os dados do usuário na variável $usuario
      */
@@ -31,15 +34,15 @@
          * Verifica se o formulário foi submetido
          */
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $nome = $_POST['nome'];
+            $nomeUsuario = $_POST['nomeUsuario'];
             $email = $_POST['email'];
             $telefone = $_POST['telefone'];
     
             /**
              * Atualiza os dados do usuário no banco
              */
-            $sql = $pdo->prepare("UPDATE usuario SET nome=?, email=?, telefone=? WHERE id=?");
-            $sql->execute([$nome, $email, $telefone, $id]);
+            $sql = $pdo->prepare("UPDATE usuario SET nomeUsuario=?, email=?, telefone=? WHERE idUsuario=?");
+            $sql->execute([$nomeUsuario, $email, $telefone, $idUsuario]);
     
             /**
              * Após a atualização, redireciona para a página de administração
@@ -49,7 +52,7 @@
         }
     } catch (PDOException $e) {
         /**
-         * Verifica se o erro é de duplicidade de chave única
+         * Verifica se o erro é de duplicidade do email ou teledone único
          */
         if ($e->errorInfo[1] == 1062) {
             /**
@@ -81,7 +84,7 @@
     <h1>Editar Usuário</h1>
     <form method="POST">
         <label>*Nome:</label>
-        <input type="text" name="nome" value="<?= $usuario['nome'] ?>" required><br>
+        <input type="text" name="nomeUsuario" value="<?= $usuario['nomeUsuario'] ?>" required><br>
 
         <label>*Email: </label>
         <input type="email" name="email" value="<?= $usuario['email'] ?>" required><br>

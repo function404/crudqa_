@@ -22,22 +22,25 @@
     }
 
     /**
-     * Recupera o ID do usuário a ser excluído através do parâmetro da URL.
+     * Recupera o idUsuario do produto e verifica se ele foi passado corretamente
      */
-    $id = $_GET['id'];
+    $idUsuario = isset($_GET['idUsuario']) ? $_GET['idUsuario'] : null;
+    if (!$idUsuario) {
+        notify('error', 'ID do produto não especificado.', 'admin');
+    }
 
     /**
      * Verifica se o administrador está tentando deletar sua própria conta.
      */
-    if ($id == $_SESSION["id"]) {
+    if ($idUsuario == $_SESSION["idUsuario"]) {
         notify('error', 'Você não pode deletar sua própria conta.', 'admin');
     }
 
     /**
      * Prepara e executa a consulta para excluir o usuário do banco de dados.
      */
-    $sql = $pdo->prepare("DELETE FROM usuario WHERE id = ?");
-    $sql->execute([$id]);
+    $sql = $pdo->prepare("DELETE FROM usuario WHERE idUsuario = ?");
+    $sql->execute([$idUsuario]);
 
     /**
      * Após a exclusão, redireciona para a página de administração.

@@ -2,7 +2,7 @@
    include('../include/protect.php');
    include('../include/conexao.php');
 
-   echo "Bem-vindo, " . $_SESSION["nome"];
+   echo "Bem-vindo, " . $_SESSION["nomeUsuario"];
    echo $_SESSION["administrador"] ? " (Administrador)" : "";
    echo "<br><br>";
 
@@ -13,7 +13,7 @@
    /**
     * Consulta os produtos disponíveis no banco de dados para listar  produtos para usuários comuns
     */ 
-   $sql = $pdo->query("SELECT nome, descricao, valor, imagem FROM produto WHERE imagem IS NOT NULL");
+   $sql = $pdo->query("SELECT nomeProduto, descricao, valor, quantidade, imagem FROM produto WHERE imagem IS NOT NULL");
    $produtos = $sql->fetchAll(PDO::FETCH_ASSOC);
 
    /**
@@ -27,9 +27,10 @@
           * Exibe cada produto com nome, descrição, valor e imagem
           */
          echo "<div style='border: 1px solid #000; padding: 10px; width: 250px;'>";
-            echo "<h3>{$produto['nome']}</h3>";
+            echo "<h3>{$produto['nomeProduto']}</h3>";
             echo "<p><strong>Descrição:</strong> {$produto['descricao']}</p>";
             echo "<p><strong>Valor:</strong> R$ " . number_format($produto['valor'], 2, ',', '.') . "</p>";
+            echo "<p><strong>Quantidade: {$produto['quantidade']}</strong></p>";
             /**
              * Se o produto tiver imagem, exibe a imagem 
              */
