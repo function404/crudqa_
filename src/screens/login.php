@@ -69,10 +69,24 @@
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap" rel="stylesheet">
+   <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="./public/boxIcon-white.png" id="favicon">
+    <script>
+        function updateFavicon() {
+            const favicon = document.getElementById("favicon");
+            const darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            favicon.href = darkMode ? "boxIcon-black.png" : "boxIcon-white.png";
+        }
+        updateFavicon();
+        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateFavicon);
+    </script>
    <title>Login</title>
 </head>
+<?php
+   $email_val = isset($_GET["email"]) ? htmlspecialchars($_GET["email"]) : "";
+   $senha_val = isset($_GET["senha"]) ? htmlspecialchars($_GET["senha"]) : "";
+?>
 <body>
-   <main> 
+   <main class="main-form"> 
       <section class="container-form">
          <section class="left-form">
             <div class="first-midfont-login">
@@ -80,7 +94,7 @@
             </div>
 
             <div class="welcolme-login">
-               <p>B E M - V I N D O</p>
+               <p>bem-vindo</p>
             </div>
                
             <div class="separator"></div>
@@ -90,20 +104,11 @@
             </div>
          </section>
 
-         <?php
-            if (isset($_GET["error_"])) {
-               echo "<p class='message' style='color: red;'>" . htmlspecialchars($_GET["message"]) . "</p>";
-            }
-            if (isset($_GET["success_"])) {
-               echo "<p class='message' style='color: green;'>" . htmlspecialchars($_GET["message"]) . "</p>";
-            }
-            $email_val = isset($_GET["email"]) ? htmlspecialchars($_GET["email"]) : "";
-         ?>
-
          <section class="right-form">
             <div class="title-login">
                <p>Faça o seu login</p>
             </div>
+
             <div class="form-login">
                <form action="login.php" method="POST">
                   <label for="email">*Email:</label>
@@ -111,15 +116,29 @@
                   
                   <label for="password">*Senha:</label>
                   <input type="password" placeholder="Digite a sua senha" name="password" id="password" required>
-      
+                  
+                  <?php
+                     if (isset($_GET["error_"])) {
+                        echo "<p style='color: red; margin-top:15px; font-size: 1vw;'>" . htmlspecialchars($_GET["message"]) . "</p>";
+                     }
+                     if (isset($_GET["success_"])) {
+                        echo "<p style='color: red; margin-top:15px; font-size: 1vw;'>" . htmlspecialchars($_GET["message"]) . "</p>";
+                     }
+                  ?>
                   <button type="submit">Entrar</button>
                </form>
             </div>
    
-            <p>
-               <a href="./register.php">Não possui uma conta?</a>
-            </p>
+
+
+            <div class="register-login">
+               <p>
+                  <a href="./register.php">Não possui uma conta?</a>
+               </p>
+            </div>
+
          </section>
       </section>
    </main>
-<?php include('../components/footer.php'); ?>
+</body>
+</html>

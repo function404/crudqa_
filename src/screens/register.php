@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    $nomeUsuario = test_input($_POST['nomeUsuario']);
    $email = test_input($_POST['email']);
    $telefone = test_input($_POST['telefone']);
-   $password = $_POST['password'];
+   $password = $_POST['senha'];
    $administrador = isset($_POST['administrador']) ? 1 : 0;
    $key = test_input($_POST['key']);
    
@@ -170,73 +170,95 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="../css/style.css">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap" rel="stylesheet">
+   <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="./public/boxIcon-white.png" id="favicon">
    <title>Cadastro</title>
 </head>
+<?php
+   /**
+    * Recupera os valores previamente informados, se existirem 
+   */ 
+   $nomeUsuario_val = isset($_GET['nomeUsuario']) ? htmlspecialchars($_GET['nomeUsuario']) : '';
+   $email_val = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
+   $telefone_val = isset($_GET['telefone']) ? htmlspecialchars($_GET['telefone']) : '';
+   $admin_checked = (isset($_GET['administrador']) && $_GET['administrador'] == 1) ? 'checked' : '';
+?>
 <body>
-   <h2>Cadastro de Usuário</h2>
-   <?php
-      /**
-       * Exibe mensagem de erro ou sucesso, se houver 
-      */ 
-      if (isset($_GET['error_'])) {
-         echo "<p class='message' style='color: red;'>" . htmlspecialchars($_GET['message']) . "</p>";
-      }
-      if (isset($_GET['success_'])) {
-         echo "<p class='message' style='color: green;'>" . htmlspecialchars($_GET['message']) . "</p>";
-      }
-      
-      /**
-       * Recupera os valores previamente informados, se existirem 
-      */ 
-      $nomeUsuario_val = isset($_GET['nomeUsuario']) ? htmlspecialchars($_GET['nomeUsuario']) : '';
-      $email_val = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
-      $telefone_val = isset($_GET['telefone']) ? htmlspecialchars($_GET['telefone']) : '';
-      $admin_checked = (isset($_GET['administrador']) && $_GET['administrador'] == 1) ? 'checked' : '';
-   ?>
-   <form action="register.php" method="POST">
-      <label for="nomeUsuario">*Nome:</label>
-      <input type="text" name="nomeUsuario" id="nomeUsuario" value="<?php echo $nomeUsuario_val; ?>" required>
-      <br><br>
+   <main class="main-form"> 
+      <section class="container-form">
+         <section class="left-form">
+            <div class="first-midfont-login">
+               <p>Seja muito</p>
+            </div>
 
-      <label for="email">*Email:</label>
-      <input type="email" name="email" id="email" value="<?php echo $email_val; ?>" required>
-      <br><br>
+            <div class="welcolme-login">
+               <p>Bem-vindo</p>
+            </div>
 
-      <label for="telefone">Telefone:</label>
-      <input type="text" name="telefone" id="telefone" value="<?php echo $telefone_val; ?>">
-      <br><br>
+            <div class="separator"></div>
 
-      <label for="password">*Senha:</label>
-      <input type="password" name="password" id="password" required>
-      <br><br>
+            <div class="last-midfont-login">
+               <p>Sistema de gerenciamento de estoque</p>
+            </div>
+         </section>
 
-      <label>
-         <input type="checkbox" name="administrador" id="administrador" <?php echo $admin_checked; ?>> Sou administrador
-      </label>
-      <br><br>
+         <section class="right-form">
+            <div class="title-login">
+               <p>Cadastro de Usuário</p>
+            </div>
 
-      <!-- Campo para chave de administrador; exibido se o checkbox estiver marcado -->
-      <div id="adminKeyDiv" style="display: <?php echo ($admin_checked ? 'block' : 'none'); ?>;">
-         <label for="key">Chave de Administrador:</label>
-         <input type="text" name="key" id="key">
-      </div>
+            <div class="form-login">
+               <form action="register.php" method="POST">
+                  <label for="nomeUsuario">*Nome:</label>
+                  <input type="text" name="nomeUsuario" id="nomeUsuario" placeholder="Digite o seu nome" value="<?php echo $nomeUsuario_val; ?>" required>
 
-      <button type="submit">Cadastrar</button>
-   </form>
+                  <label for="email">*Email:</label>
+                  <input type="email" name="email" id="email" placeholder="Digite o seu email" value="<?php echo $email_val; ?>" required>
 
-   <p>
-      Já tem uma conta? <a href="./login.php">Entrar</a>
-   </p>
+                  <label for="telefone">Telefone:</label>
+                  <input type="text" name="telefone" id="telefone" placeholder="Digite o seu telefone" value="<?php echo $telefone_val; ?>">
 
+                  <label for="senha">*Senha:</label>
+                  <input type="password" name="senha" id="senha" placeholder="Digite a sua senha" required>
+
+                  <div class="keyadmin">
+                     <input type="checkbox" name="administrador" id="administrador" <?php echo $admin_checked; ?>>
+                     <label>Sou um administrador</label>
+                  </div>
+                  <div id="adminKeyDiv" style="display: none;">
+                     <label for="key">Chave de Administrador:</label>
+                     <input type="text" name="key" id="key" placeholder="Digite a chave de administrador">
+                  </div>
+                  
+                  <?php
+                     if (isset($_GET['error_'])) {
+                        echo "<p style='color: red; margin-top:15px; font-size: 1vw;'>" . htmlspecialchars($_GET['message']) . "</p>";
+                     }
+                     if (isset($_GET['success_'])) {
+                        echo "<p style='color: red; margin-top:15px; font-size: 1vw;'>" . htmlspecialchars($_GET['message']) . "</p>";
+                     }
+                  ?>
+
+                  <button type="submit">Cadastrar</button>
+               </form>
+            </div>
+
+            <div class="register-login">
+               <p>
+                  <a href="./login.php">Já tem uma conta? Entrar</a>
+               </p>
+            </div>
+         </section>
+      </section>
+   </main>
    <script>
-      /**
-      * JavaScript para mostrar/ocultar o campo de chave conforme o checkbox de administrador
-      */ 
       document.getElementById('administrador').addEventListener('change', function() {
          var adminKeyDiv = document.getElementById('adminKeyDiv');
          adminKeyDiv.style.display = this.checked ? 'block' : 'none';
       });
    </script>
-<?php
-   include('../components/footer.php');
-?>
+<body>
+</html>
