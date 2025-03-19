@@ -64,7 +64,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastrar Produto</title>
+    <title>Cadastrar Produto | StockMaster</title>
 </head>
 <body>
     <h1>Cadastrar Produto</h1>

@@ -62,69 +62,96 @@ header .logo img {
     * 
 */
 
-.container-painel {
+.container {
     margin: 5rem 10rem;
 }
 
-.button-admin{
+.button-admin {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    width: 100%;
 }
 
-.button-admin a{
-    width: 30%;
+.button-admin-content {
+    justify-content: flex-start;
     padding: 5px 15px;
     background-color: rgb(56, 182, 255);
-    color: rgb(255, 255, 255);
-    border: none;
-    border-radius: 30px;
-    text-align: center;
-    font-size: 1.5vw;
+    border-radius: 4px;
+    font-size: 1vw;
     cursor: pointer;
-    margin-bottom: 1rem;
-    margin-top: 2rem;
+    margin: 1rem 0 2rem 0;
     transition: ease-in-out 0.3s;
     text-decoration: none;
+    color: rgb(255, 255, 255);
 }
 
-.button-admin a:hover {
+.button-admin-content:hover {
     background-color: rgb(15, 104, 177);
-    transition: ease-in-out 0.3s;
+    color: rgb(255, 255, 255);
+}
+
+.button-admin-content a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.button-admin-content i {
+    color: inherit;
 }
 
 .card-products {
-    border: 5px solid rgb(255, 255, 255); 
-    border-radius: 25px;
-    color: rgb(255, 255, 255);
-    padding: 10px; 
-    width: 400px;
+    border-radius: 15px;
+    color: rgb(255, 255, 255); 
+    width: 350px;
     margin: 10px;
     background-color: rgb(56, 182, 255);
+    text-align: center;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+    overflow: hidden; 
+    position: relative; 
+}
+
+.card-products:hover {
+    background-color: rgb(15, 104, 177);
+    transition: ease-in-out 0.3s;
 }
 
 .card-products img {
     width: 100%;
     height: 200px;
-    border: 2px solid rgb(255, 255, 255); 
+    border-radius: 15px 15px 0px 0px;
+    transition: transform 0.3s ease-in-out;  
     object-fit: cover;
+    z-index: 1; 
 }
 
-.sair {
+.card-products img:hover {
+    transform: scale(1.05); 
+}
+
+.card-products .product-info {
+    position: relative;
+    z-index: 2; 
+    padding: 10px;
+}
+
+.top-painel .sair {
     display: flex;
     justify-content: center;
 }
 
-.sair p{
-    width: 5%;
+.top-painel .sair p{
+    width: 150px;
     padding: 5px 15px;
     background-color: rgb(255, 56, 56);
     color: rgb(255, 255, 255);
     border: none;
-    border-radius: 30px;
+    border-radius: 4px;
     text-align: center;
-    font-size: 1.2vw;
+    font-size: 1vw;
     cursor: pointer;
-    margin-bottom: 1rem;
     transition: ease-in-out 0.3s;
     text-decoration: none;
 }
@@ -137,6 +164,31 @@ header .logo img {
 .sair a{
     text-decoration: none;
     color: rgb(255, 255, 255);
+}
+
+.top-painel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-items: center;
+}
+
+.card-description {
+    font-size: 1rem; 
+    padding: 0 16px; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    transition: ease-in-out 0.3s;
+}
+
+.card-description:hover {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
 }
 /**
    * Login/Register CSS
@@ -326,6 +378,52 @@ footer {
     width: 20px;
     margin-right: 10px;
 }
+
+/**
+    * Administrador CSS
+    * 
+    * Contém todo o CSS da página de administração.
+    * 
+*/
+
+table {
+    width: 100%;
+    border-collapse: collapse; 
+    margin: 20px 0; 
+    font-family: Arial, sans-serif; 
+}
+
+th {
+    background-color: rgb(56, 182, 255); 
+    color: white; 
+    text-align: center; 
+    padding: 12px 15px; 
+    font-weight: bold; 
+    max-width: 200px; /* Limite o tamanho máximo da célula */
+    overflow: hidden; /* Esconde o texto que ultrapassar */
+    text-overflow: ellipsis; /* Adiciona '...' se o texto for muito grande */
+    white-space: nowrap; /* Impede a quebra de linha */
+}
+
+td {
+    padding: 12px 15px; 
+    text-align: left; 
+    border-bottom: 1px solid rgb(255, 255, 255); 
+    max-width: 200px; /* Limite o tamanho máximo da célula */
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: white; 
+}
+
+table, th, td {
+    border: 1px solid rgb(255, 255, 255); 
+}
+
 
 @media (max-width: 1120px) {
     .main-form .container-form .right-form .title-login p{

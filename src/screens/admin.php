@@ -35,13 +35,16 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Administração</title>
+    <title>Administração | StockMaster</title>
 </head>
 <body>
-    <h1>Painel do Administrador</h1>
+    <?php include('../components/header.php'); ?>
+
+    <div class="container">
+    <h1 style="font-size: 2vw; margin-bottom: 1rem;">Painel do Administrador</h1>
     
     <h2>Gerenciar Usuários</h2>
-    <table border="1">
+    <table>
         <tr>
             <th>ID</th>
             <th>Nome</th>
@@ -103,8 +106,8 @@
                 <td><?= $produto['criado_as']?></td>
                 <td><?= $produto['atualizado_as']?></td>
                 <td>
-                    <a href="editarProduto.php?idProduto=<?= $produto['idProduto'] ?>">Editar</a> |
-                    <a href="excluirProduto.php?idProduto=<?= $produto['idProduto'] ?>" onclick="return confirm('Tem certeza?')">Excluir</a>
+                    <a href="editarProduto.php?idProduto=<?= $produto['idProduto'] ?>"><i class="fa-solid fa-pen fa-lg" style="color:rgb(56, 182, 255);"></i></a> |
+                    <a href="excluirProduto.php?idProduto=<?= $produto['idProduto'] ?>" onclick="return confirm('Tem certeza?')"><i class="fa-solid fa-trash fa-lg" style="color: #ff3838;"></i></a>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -128,4 +131,5 @@
     <p><a href="cadastrarChaveAdmin.php">Adicionar Chave para Administrador</a></p>
     
     <p><a href="painel.php">Voltar</a></p>
+    </div>
 <?php include('../components/footer.php'); ?>

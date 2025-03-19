@@ -63,7 +63,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Chave Admin</title>
+    <title>Cadastrar Chave Admin | StockMaster</title>
 </head>
 <body>
     <h1>Cadastro de chave para criação de administradores</h1>    

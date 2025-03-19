@@ -83,7 +83,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Produto</title>
+    <title>Editar Produto | StockMaster</title>
 </head>
 <body>
     <h1>Editar Produto</h1>
