@@ -35,13 +35,23 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Administração</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Administração | StockMaster</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="../public/boxIcon-white.png">
 </head>
 <body>
-    <h1>Painel do Administrador</h1>
+    <?php include('../components/header.php'); ?>
+
+    <div class="container">
+    <h1 style="font-size: 2vw; margin-bottom: 1rem;">Painel do Administrador</h1>
     
     <h2>Gerenciar Usuários</h2>
-    <table border="1">
+    <table>
         <tr>
             <th>ID</th>
             <th>Nome</th>
@@ -62,8 +72,8 @@
                 <td><?= $usuario['criado_as']?></td>
                 <td><?= $usuario['atualizado_as']?></td>
                 <td>
-                    <a href="editarUsuario.php?idUsuario=<?= $usuario['idUsuario'] ?>">Editar</a> |
-                    <a href="excluirUsuario.php?idUsuario=<?= $usuario['idUsuario'] ?>" onclick="return confirm('Tem certeza?')">Excluir</a>
+                    <a href="editarUsuario.php?idUsuario=<?= $usuario['idUsuario'] ?>"><i class="fa-solid fa-pen fa-lg" style="color:rgb(56, 182, 255);"></i></a> |
+                    <a href="excluirUsuario.php?idUsuario=<?= $usuario['idUsuario'] ?>" onclick="return confirm('Tem certeza?')"><i class="fa-solid fa-trash fa-lg" style="color: #ff3838;"></i></a>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -103,8 +113,8 @@
                 <td><?= $produto['criado_as']?></td>
                 <td><?= $produto['atualizado_as']?></td>
                 <td>
-                    <a href="editarProduto.php?idProduto=<?= $produto['idProduto'] ?>">Editar</a> |
-                    <a href="excluirProduto.php?idProduto=<?= $produto['idProduto'] ?>" onclick="return confirm('Tem certeza?')">Excluir</a>
+                    <a href="editarProduto.php?idProduto=<?= $produto['idProduto'] ?>"><i class="fa-solid fa-pen fa-lg" style="color:rgb(56, 182, 255);"></i></a> |
+                    <a href="excluirProduto.php?idProduto=<?= $produto['idProduto'] ?>" onclick="return confirm('Tem certeza?')"><i class="fa-solid fa-trash fa-lg" style="color: #ff3838;"></i></a>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -128,4 +138,5 @@
     <p><a href="cadastrarChaveAdmin.php">Adicionar Chave para Administrador</a></p>
     
     <p><a href="painel.php">Voltar</a></p>
+    </div>
 <?php include('../components/footer.php'); ?>
