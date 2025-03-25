@@ -42,13 +42,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <title>Administração | StockMaster</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="../public/boxIcon-white.png">
+    <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="../public/boxIcon.png">
 </head>
 <body>
     <?php include('../components/header.php'); ?>
 
     <div class="container">
-    <h1 style="font-size: 2vw; margin-bottom: 1rem;">Painel do Administrador</h1>
+    <h1>Painel do Administrador</h1>
     
     <h2>Gerenciar Usuários</h2>
     <table>
@@ -119,7 +119,9 @@
             </tr>
         <?php endforeach; ?>
     </table>
-    <p><a href="cadastrarProduto.php">Adicionar Novo Produto</a></p>
+    <div class="links-table-prod">
+        <p><a href="cadastrarProduto.php">Adicionar Novo Produto</a></p>
+    </div>
     
     <h2>Gerenciar Chaves</h2>
     <table border="1">
@@ -135,8 +137,13 @@
         <?php endforeach; ?>
     </table>
 
-    <p><a href="cadastrarChaveAdmin.php">Adicionar Chave para Administrador</a></p>
-    
-    <p><a href="painel.php">Voltar</a></p>
+    <div class="links-table-key">
+        <p><a href="cadastrarChaveAdmin.php">Adicionar nova chave</a></p>
+    </div>
+
+    <div class="voltar">
+        <p><a href="painel.php">Voltar</a></p>
+    </div>
+
     </div>
 <?php include('../components/footer.php'); ?>

@@ -76,17 +76,7 @@
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <title>Login | StockMaster</title>
    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap" rel="stylesheet">
-   <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="../public/boxIcon-white.png" id="favicon">
-   <!-- <script>
-      function updateFavicon() {
-         const favicon = document.getElementById("favicon");
-         const darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-         favicon.href = darkMode ? "boxIcon-black.png" : "boxIcon-white.png";
-      }
-
-      updateFavicon();
-      window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateFavicon);
-   </script> -->
+   <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="../public/boxIcon.png" id="favicon">
 </head>
 <?php
    $email_val = isset($_GET["email"]) ? htmlspecialchars($_GET["email"]) : "";
