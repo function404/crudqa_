@@ -163,12 +163,12 @@ header .logo img {
     text-decoration: none;
 }
 
-.sair p:hover {
+.top-painel .sair p:hover {
     background-color: rgb(177, 15, 15);
     transition: ease-in-out 0.3s;
 }
 
-.sair a{
+.top-painel .sair a{
     text-decoration: none;
     color: rgb(255, 255, 255);
 }
@@ -395,40 +395,151 @@ footer {
 
 table {
     width: 100%;
-    border-collapse: collapse; 
-    margin: 20px 0; 
-    font-family: Arial, sans-serif; 
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 th {
-    background-color: rgb(56, 182, 255); 
-    color: white; 
-    text-align: center; 
-    padding: 12px 15px; 
-    font-weight: bold; 
-    max-width: 200px; /* Limite o tamanho máximo da célula */
-    overflow: hidden; /* Esconde o texto que ultrapassar */
-    text-overflow: ellipsis; /* Adiciona '...' se o texto for muito grande */
-    white-space: nowrap; /* Impede a quebra de linha */
+    background-color: rgb(56, 182, 255);
+    color: white;
+    text-align: center;
+    padding: 8px 10px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    max-width: 65px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 td {
-    padding: 12px 15px; 
-    text-align: left; 
-    border-bottom: 1px solid rgb(255, 255, 255); 
-    max-width: 200px; /* Limite o tamanho máximo da célula */
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-    white-space: nowrap; 
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid rgb(255, 255, 255);
+    max-width: 65px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     text-align: center;
+    font-size: 0.85rem;
+    transition: ease-in-out 0.3s;
+}
+
+td:hover {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 tr:nth-child(even) {
-    background-color: white; 
+    background-color: #f8f9fa;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
 }
 
 table, th, td {
-    border: 1px solid rgb(255, 255, 255); 
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.links-table-prod p {
+    display: flex;
+    width: 100%; 
+    max-width: 250px;
+    padding: 5px 0;
+    background-color: rgb(56, 182, 255);
+    color: rgb(255, 255, 255);
+    border: none;
+    margin-bottom: 2rem;
+    font-size: 1vw; 
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: ease-in-out 0.3s;
+    box-sizing: border-box; 
+}
+
+.links-table-prod p:hover {
+    background-color: rgb(15, 104, 177);
+    transition: ease-in-out 0.3s;
+}
+
+.links-table-prod a {
+    text-decoration: none;
+    margin-left: 10px;
+    font-size: 1vw;
+    color: white;
+}
+
+.links-table-prod a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.links-table-key p {
+    display: flex;
+    width: 100%; 
+    max-width: 230px;
+    padding: 5px 0;
+    background-color: rgb(56, 182, 255);
+    color: rgb(255, 255, 255);
+    border: none;
+    margin-bottom: 2rem;
+    font-size: 1vw; 
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: ease-in-out 0.3s;
+    box-sizing: border-box; 
+}
+
+.links-table-key p:hover {
+    background-color: rgb(15, 104, 177);
+    transition: ease-in-out 0.3s;
+}
+
+.links-table-key a {
+    text-decoration: none;
+    margin-left: 10px;
+    font-size: 1vw;
+    color: white;
+}
+
+.links-table-key a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.voltar {
+    display: flex;
+    justify-content: center;
+}
+
+.voltar p{
+    width: 150px;
+    padding: 5px 15px;
+    background-color: rgb(56, 182, 255);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 1vw;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+    text-decoration: none;
+}
+
+.voltar p:hover {
+    background-color: rgb(15, 104, 177);
+    transition: ease-in-out 0.3s;
+}
+
+.voltar a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
 }
 
 
@@ -456,6 +567,125 @@ table, th, td {
 
     .main-form .container-form .right-form button {
         font-size: 1.8vw;
+    }
+}
+
+@media (max-width: 910px) {
+    .container{
+        margin: 5rem 1.5rem;
+    }
+
+    .container h1{
+        margin-bottom: 1rem;
+        font-size: 30px;
+    }
+    table, thead, tbody, th, td, tr {
+        display: block;
+        max-width: 100%;
+    }
+    
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    tr {
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    
+    td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 0.8rem;
+    }
+    
+    td:hover {
+        white-space: normal;
+        overflow: visible;
+    }
+    
+    td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 40%;
+        padding-right: 10px;
+        font-weight: bold;
+        text-align: left;
+        color: rgb(56, 182, 255);
+        font-size: 0.8rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .links-table-prod {
+        display: flex;
+        justify-content: center;
+    }
+
+    .links-table-prod p {
+        width: 100%; 
+        max-width: 910px;
+        justify-content: center;
+    }
+    
+    .links-table-prod a {
+        margin-left: 0px;
+        font-size: 20px;
+    }
+    
+    .links-table-key{
+        display: flex;
+        justify-content: center;
+    }
+
+    .links-table-key p {
+        width: 100%; 
+        max-width: 910px;
+        justify-content: center;
+    }
+    
+    .links-table-key a {
+        margin-left: 0px;
+        font-size: 20px;
+    }
+    
+    .voltar {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .voltar p{
+        width: 100%;
+        padding: 5px 15px;
+        background-color: rgb(56, 182, 255);
+        color: rgb(255, 255, 255);
+        border: none;
+        border-radius: 4px;
+        text-align: center;
+        font-size: 20px;
+        cursor: pointer;
+        transition: ease-in-out 0.3s;
+        text-decoration: none;
+    }
+    
+    .voltar p:hover {
+        background-color: rgb(15, 104, 177);
+        transition: ease-in-out 0.3s;
+    }
+    
+    .voltar a{
+        text-decoration: none;
+        color: rgb(255, 255, 255);
     }
 }
 
