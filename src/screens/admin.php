@@ -174,7 +174,7 @@
         <?php endif; ?>
 
         <div class="links">
-            <a href="cadastrarProduto.php" class="links-content">
+            <a href="cadastrarChaveAdmin.php" class="links-content">
                 <p>Adicionar Nova Chave</p>
                 <i class="fa-solid fa-add"></i>
             </a>
