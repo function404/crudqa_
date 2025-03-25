@@ -33,22 +33,21 @@ function notify($type, $message, $redirectUrl, $params = []) {
       <html lang='pt-br'>
       <head>
          <meta charset='UTF-8'>
-         <title>Sucesso</title>
-         <meta http-equiv='refresh' content='300;url=' . $redirectUrl . '.php'>
+         <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+         <meta http-equiv='refresh' content='3;url=" . $redirectUrl . ".php'>
+         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
          <link rel='stylesheet' href='../css/style.css'>
          <link rel='preconnect' href='https://fonts.googleapis.com'>
          <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
-         <title>Administração | StockMaster</title>
+         <title>Sucesso</title>
          <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap' rel='stylesheet'>
          <link rel='shortcut icon' type='image/x-icon' sizes='32x32' href='../public/boxIcon.png'>
-         <style>
-            body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-            .message { color: green; font-size: 1.2em; }
-         </style>
       </head>
       <body>
-         <p class='message'>" . htmlspecialchars($message) . "</p>
-         <p>Você será redirecionado em 3 segundos. Se não for, <a href='" . $redirectUrl . ".php'>clique aqui</a>.</p>
+         <div style='text-align: center; margin-top: 50px;'>
+            <p style='color: green; font-size: 1.2em;'>" . htmlspecialchars($message) . "</p>
+            <p>Você será redirecionado em 3 segundos. Se não for, <a href='" . $redirectUrl . ".php'>clique aqui</a>.</p>
+         <div>
       </body>
       </html>";
       exit();
@@ -159,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       'idUsuario' => null,
       'nomeUsuario' => $nomeUsuario,
       'email' => $email,
-      'telefone' => $telefone,
+      'telefone' => null,
       'senha' => $senhaHash,
       'administrador' => $administrador
    ]);
@@ -181,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <title>Cadstro | StockMaster</title>
    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap" rel="stylesheet">
-   <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="../public/boxIcon.png">
+   <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="./public/boxIcon.png" id="favicon">
 </head>
 <?php
    /**
@@ -242,7 +241,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   <?php
                      if (isset($_GET['error_'])) {
                         echo "<div style='margin-top: 20px; justify-content: flex-start; display: flex;'>";
-                        echo "<span class='errors'>" . htmlspecialchars($_GET['message']) . "</span>";
+                           echo "<span class='errors'>" . htmlspecialchars($_GET['message']) . "</span>";
                         echo "</div>";
                      }
                   ?>

@@ -68,7 +68,15 @@
                         <td><?= $usuario['idUsuario'] ?></td>
                         <td><?= $usuario['nomeUsuario'] ?></td>
                         <td><?= $usuario['email'] ?></td>
-                        <td><?= $usuario['telefone'] ?></td>
+                        <td>
+                            <?php if ($usuario['telefone']): ?>
+                                <?= $usuario['telefone'] ?>
+                            <?php else: ?>
+                                <div style="margin: 5px 0;">
+                                    <span class="errors">Sem telefone</span>
+                                </div>
+                            <?php endif; ?>
+                        </td>
                         <td><?= $usuario['administrador']?></td>
                         <td><?= $usuario['criado_as']?></td>
                         <td><?= $usuario['atualizado_as']?></td>
@@ -81,7 +89,7 @@
             </table>
         <?php else: ?>
             <div style="margin: 20px 0;">
-                <span class="errors" style="text-align: left;">Nenhum produto disponível.</span>
+                <span class="errors" style="text-align: left;">Nenhum usuário cadastrado. como você viu esse mensgem??.</span>
             </div>
         <?php endif; ?>
 
@@ -117,7 +125,7 @@
                     <td>
                         <?php if ($produto['imagem']): ?>
                             <img src="data:image/jpeg;base64,<?= base64_encode($produto['imagem']) ?>" width="50">
-                            <?php else: ?>
+                        <?php else: ?>
                             <div style="margin: 5px 0;">
                                 <span class="errors">Sem Imagem</span>
                             </div>
@@ -138,10 +146,13 @@
             </div>
         <?php endif ?>
 
-        <div class="links-table-prod">
-            <p><a href="cadastrarProduto.php">Adicionar Novo Produto</a></p>
+        <div class="links">
+            <a href="cadastrarProduto.php" class="links-content">
+                <p>Adicionar Novo Produto</p>
+                <i class="fa-solid fa-add"></i>
+            </a>
         </div>
-        
+
         <h2>Gerenciar Chaves</h2>
         <?php if ($keys): ?>
             <table border="1">
@@ -156,18 +167,21 @@
                 </tr>
                 <?php endforeach; ?>
             </table>
-            <?php else: ?>
+        <?php else: ?>
             <div style="margin: 20px 0;">
                 <span class="errors" style="text-align: left;">Nenhuma chave disponível.</span>
             </div>
         <?php endif; ?>
 
-        <div class="links-table-key">
-            <p><a href="cadastrarChaveAdmin.php">Adicionar nova chave</a></p>
+        <div class="links">
+            <a href="cadastrarProduto.php" class="links-content">
+                <p>Adicionar Nova Chave</p>
+                <i class="fa-solid fa-add"></i>
+            </a>
         </div>
 
         <div class="voltar">
-            <p><a href="painel.php">Voltar</a></p>
+            <a href="painel.php">Voltar</a>
         </div>
     </div>
 <?php include('../components/footer.php'); ?>

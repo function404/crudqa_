@@ -32,20 +32,23 @@
       <div class="top-painel">
          <h1 style="font-size: 2vw;">Bem-vindo, <?= $nomeUsuario ?> <?= $administrador ? "<p style='font-size: 1vw;'>(Administrador)</p>" : "" ?></h1>
       
-         <div class="sair">
-            <p><a href="../include/logout.php">Sair <i class="fa-solid fa-right-from-bracket"></i></a></p>
+         <div class="logout">
+            <a class="logout-content" href="../include/logout.php">
+               <p>Sair</p>
+               <i class="fa-solid fa-right-from-bracket"></i>
+            </a>
          </div>
       </div>
 
       <?php if ($administrador): ?>
-         <div class="button-admin">
-            <div class="button-admin-content">
-               <a href="admin.php">Ir para o Painel de Administração</a>
+         <div class="links">
+            <a href="admin.php" class="links-content">
+               <p>Ir para o Painel de Administração</p>
                <i class="fa-solid fa-arrow-right"></i>
-            </div>
-         </div>
+            </a>
+        </div>
       <?php endif; ?>
-
+            
       <!-- Verifica se existem produtos cadastrados -->
       <?php if ($produtos): ?>
          <h2 style='text-align: center; font-size: 1.7vw; margin-bottom: 10px'>Produtos Disponíveis</h2>
