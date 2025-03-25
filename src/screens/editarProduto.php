@@ -119,7 +119,9 @@
 
         <?php
             if (isset($_GET['error_'])) {
-                echo "<p style='color:red;'>" . htmlspecialchars($_GET['message']) . "</p>";
+                echo "<div style='margin: 20px 0;'>";
+                echo "<span class='errors'>" . htmlspecialchars($_GET['message']) . "</span>";
+                echo "</div>";
             }
         ?>
 

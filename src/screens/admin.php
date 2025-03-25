@@ -48,95 +48,120 @@
     <?php include('../components/header.php'); ?>
 
     <div class="container">
-    <h1 style="font-size: 2vw; margin-bottom: 1rem;">Painel do Administrador</h1>
-    
-    <h2>Gerenciar Usuários</h2>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>Administrador</th>
-            <th>Criado</th>
-            <th>Atualizado</th>
-            <th>Ações</th>
-        </tr>
-        <?php foreach ($usuarios as $usuario): ?>
+        <h1 style="font-size: 2vw; margin-bottom: 1rem;">Painel do Administrador</h1>
+        
+        <h2>Gerenciar Usuários</h2>
+        <?php if ($usuarios): ?>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Administrador</th>
+                    <th>Criado</th>
+                    <th>Atualizado</th>
+                    <th>Ações</th>
+                </tr>
+                <?php foreach ($usuarios as $usuario): ?>
+                    <tr>
+                        <td><?= $usuario['idUsuario'] ?></td>
+                        <td><?= $usuario['nomeUsuario'] ?></td>
+                        <td><?= $usuario['email'] ?></td>
+                        <td><?= $usuario['telefone'] ?></td>
+                        <td><?= $usuario['administrador']?></td>
+                        <td><?= $usuario['criado_as']?></td>
+                        <td><?= $usuario['atualizado_as']?></td>
+                        <td>
+                            <a href="editarUsuario.php?idUsuario=<?= $usuario['idUsuario'] ?>"><i class="fa-solid fa-pen fa-lg" style="color:rgb(56, 182, 255);"></i></a> |
+                            <a href="excluirUsuario.php?idUsuario=<?= $usuario['idUsuario'] ?>" onclick="return confirm('Tem certeza?')"><i class="fa-solid fa-trash fa-lg" style="color: #ff3838;"></i></a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        <?php else: ?>
+            <div style="margin: 20px 0;">
+                <span class="errors" style="text-align: left;">Nenhum produto disponível.</span>
+            </div>
+        <?php endif; ?>
+
+        <?php
+            if (isset($_GET['error_'])) {
+                echo "<div style='margin: 20px 0;'>";
+                echo "<span class='errors'>" . htmlspecialchars($_GET['message']) . "</span>";
+                echo "</div>";
+            }
+        ?>
+
+        <h2>Gerenciar Produtos</h2>
+        <?php if ($produtos): ?>
+        <table border="1">
             <tr>
-                <td><?= $usuario['idUsuario'] ?></td>
-                <td><?= $usuario['nomeUsuario'] ?></td>
-                <td><?= $usuario['email'] ?></td>
-                <td><?= $usuario['telefone'] ?></td>
-                <td><?= $usuario['administrador']?></td>
-                <td><?= $usuario['criado_as']?></td>
-                <td><?= $usuario['atualizado_as']?></td>
-                <td>
-                    <a href="editarUsuario.php?idUsuario=<?= $usuario['idUsuario'] ?>"><i class="fa-solid fa-pen fa-lg" style="color:rgb(56, 182, 255);"></i></a> |
-                    <a href="excluirUsuario.php?idUsuario=<?= $usuario['idUsuario'] ?>" onclick="return confirm('Tem certeza?')"><i class="fa-solid fa-trash fa-lg" style="color: #ff3838;"></i></a>
-                </td>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Quantidade</th>
+                <th>Imagem</th>
+                <th>Criado</th>
+                <th>Atualizado</th>
+                <th>Ações</th>
             </tr>
-        <?php endforeach; ?>
-    </table>
+            <?php foreach ($produtos as $produto): ?>
+                <tr>
+                    <td><?= $produto['idProduto'] ?></td>
+                    <td><?= $produto['nomeProduto'] ?></td>
+                    <td><?= $produto['descricao'] ?></td>
+                    <td>R$ <?= number_format($produto['valor'], 2, ',', '.') ?></td>
+                    <td><?= $produto['quantidade'] ?></td>
+                    <td>
+                        <?php if ($produto['imagem']): ?>
+                            <img src="data:image/jpeg;base64,<?= base64_encode($produto['imagem']) ?>" width="50">
+                            <?php else: ?>
+                            <div style="margin: 5px 0;">
+                                <span class="errors">Sem Imagem</span>
+                            </div>
+                        <?php endif; ?>
+                    </td>
+                    <td><?= $produto['criado_as']?></td>
+                    <td><?= $produto['atualizado_as']?></td>
+                    <td>
+                        <a href="editarProduto.php?idProduto=<?= $produto['idProduto'] ?>"><i class="fa-solid fa-pen fa-lg" style="color:rgb(56, 182, 255);"></i></a> |
+                        <a href="excluirProduto.php?idProduto=<?= $produto['idProduto'] ?>" onclick="return confirm('Tem certeza?')"><i class="fa-solid fa-trash fa-lg" style="color: #ff3838;"></i></a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+            <?php else: ?>
+            <div style="margin: 20px 0;">
+                <span class="errors" style="text-align: left;">Nenhum produto disponível.</span>
+            </div>
+        <?php endif ?>
 
-    <?php
-        if (isset($_GET['error_'])) {
-            echo "<p style='color:red;'>" . htmlspecialchars($_GET['message']) . "</p>";
-        }
-    ?>
+        <p><a href="cadastrarProduto.php">Adicionar Novo Produto</a></p>
+        
+        <h2>Gerenciar Chaves</h2>
+        <?php if ($keys): ?>
+            <table border="1">
+                <tr>
+                    <th>ID</th>
+                    <th>Chave</th>
+                </tr>
+                <?php foreach ($keys as $key): ?>
+                <tr>
+                    <td><?= $key['idKey']?></td>
+                    <td><?= $key['key_value']?></td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
+            <?php else: ?>
+            <div style="margin: 20px 0;">
+                <span class="errors" style="text-align: left;">Nenhuma chave disponível.</span>
+            </div>
+        <?php endif; ?>
 
-    <h2>Gerenciar Produtos</h2>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th>Valor</th>
-            <th>Quantidade</th>
-            <th>Imagem</th>
-            <th>Criado</th>
-            <th>Atualizado</th>
-            <th>Ações</th>
-        </tr>
-        <?php foreach ($produtos as $produto): ?>
-            <tr>
-                <td><?= $produto['idProduto'] ?></td>
-                <td><?= $produto['nomeProduto'] ?></td>
-                <td><?= $produto['descricao'] ?></td>
-                <td>R$ <?= number_format($produto['valor'], 2, ',', '.') ?></td>
-                <td><?= $produto['quantidade'] ?></td>
-                <td>
-                    <?php if ($produto['imagem']): ?>
-                        <img src="data:image/jpeg;base64,<?= base64_encode($produto['imagem']) ?>" width="50">
-                    <?php endif; ?>
-                </td>
-                <td><?= $produto['criado_as']?></td>
-                <td><?= $produto['atualizado_as']?></td>
-                <td>
-                    <a href="editarProduto.php?idProduto=<?= $produto['idProduto'] ?>"><i class="fa-solid fa-pen fa-lg" style="color:rgb(56, 182, 255);"></i></a> |
-                    <a href="excluirProduto.php?idProduto=<?= $produto['idProduto'] ?>" onclick="return confirm('Tem certeza?')"><i class="fa-solid fa-trash fa-lg" style="color: #ff3838;"></i></a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
-    <p><a href="cadastrarProduto.php">Adicionar Novo Produto</a></p>
-    
-    <h2>Gerenciar Chaves</h2>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Chave</th>
-        </tr>
-        <?php foreach ($keys as $key): ?>
-        <tr>
-            <td><?= $key['idKey']?></td>
-            <td><?= $key['key_value']?></td>
-        </tr>
-        <?php endforeach; ?>
-    </table>
-
-    <p><a href="cadastrarChaveAdmin.php">Adicionar Chave para Administrador</a></p>
-    
-    <p><a href="painel.php">Voltar</a></p>
+        <p><a href="cadastrarChaveAdmin.php">Adicionar Chave para Administrador</a></p>
+        
+        <p><a href="painel.php">Voltar</a></p>
     </div>
 <?php include('../components/footer.php'); ?>

@@ -34,7 +34,13 @@ function notify($type, $message, $redirectUrl, $params = []) {
       <head>
          <meta charset='UTF-8'>
          <title>Sucesso</title>
-         <meta http-equiv='refresh' content='3;url=" . $redirectUrl . ".php'>
+         <meta http-equiv='refresh' content='300;url=' . $redirectUrl . '.php'>
+         <link rel='stylesheet' href='../css/style.css'>
+         <link rel='preconnect' href='https://fonts.googleapis.com'>
+         <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+         <title>Administração | StockMaster</title>
+         <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap' rel='stylesheet'>
+         <link rel='shortcut icon' type='image/x-icon' sizes='32x32' href='../public/boxIcon.png'>
          <style>
             body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
             .message { color: green; font-size: 1.2em; }
@@ -235,10 +241,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   
                   <?php
                      if (isset($_GET['error_'])) {
-                        echo "<p style='color: red; margin-top:15px; font-size: 1vw;'>" . htmlspecialchars($_GET['message']) . "</p>";
-                     }
-                     if (isset($_GET['success_'])) {
-                        echo "<p style='color: red; margin-top:15px; font-size: 1vw;'>" . htmlspecialchars($_GET['message']) . "</p>";
+                        echo "<div style='margin-top: 20px; justify-content: flex-start; display: flex;'>";
+                        echo "<span class='errors'>" . htmlspecialchars($_GET['message']) . "</span>";
+                        echo "</div>";
                      }
                   ?>
 

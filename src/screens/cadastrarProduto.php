@@ -77,7 +77,9 @@
     <h1>Cadastrar Produto</h1>
     <?php
         if (isset($_GET['error_'])) {
-            echo "<p class='message' style='color: red;'>" . htmlspecialchars($_GET['message']) . "</p>";
+            echo "<div style='margin: 20px 0;'>";
+            echo "<span class='errors'>" . htmlspecialchars($_GET['message']) . "</span>";
+            echo "</div>";
         }
 
         $nomeProduto_val = isset($_GET['nomeProduto']) ? htmlspecialchars($_GET['nomeProduto']) : '';

@@ -52,7 +52,7 @@
         }
     } catch (PDOException $e) {
         /**
-         * Verifica se o erro é de duplicidade do email ou teledone único
+         * Verifica se o erro é de duplicidade do email ou telefone único
          */
         if ($e->errorInfo[1] == 1062) {
             /**
@@ -108,7 +108,9 @@
      * Exibe a mensagem de erro, se existir
      */
     if (isset($errorMessage)) {
-        echo "<p style='color:red;'>$errorMessage</p>";
+        echo "<div style='margin: 20px 0;'>";
+        echo "<span class='errors'>$errorMessage</span>";
+        echo "</div>";;
     }
     ?>
 <?php include('../components/footer.php'); ?>

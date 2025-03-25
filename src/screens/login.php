@@ -126,10 +126,10 @@
                   
                   <?php
                      if (isset($_GET["error_"])) {
-                        echo "<p style='color: red; margin-top:15px; font-size: 1vw;'>" . htmlspecialchars($_GET["message"]) . "</p>";
-                     }
-                     if (isset($_GET["success_"])) {
-                        echo "<p style='color: red; margin-top:15px; font-size: 1vw;'>" . htmlspecialchars($_GET["message"]) . "</p>";
+                        // echo "<p style='color: red; margin-top:15px; font-size: 1vw;'>" . htmlspecialchars($_GET["message"]) . "</p>";
+                        echo "<div style='margin-top: 20px; justify-content: flex-start; display: flex;'>";
+                        echo "<span class='errors'>" . htmlspecialchars($_GET['message']) . "</span>";
+                        echo "</div>";
                      }
                   ?>
                   <button type="submit">Entrar</button>
