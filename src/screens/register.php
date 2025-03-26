@@ -240,7 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   
                   <?php
                      if (isset($_GET['error_'])) {
-                        echo "<div style='margin-top: 20px; justify-content: flex-start; display: flex;'>";
+                        echo "<div style='margin-top: 20px;'>";
                            echo "<span class='errors'>" . htmlspecialchars($_GET['message']) . "</span>";
                         echo "</div>";
                      }

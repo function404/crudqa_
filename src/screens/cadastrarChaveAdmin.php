@@ -75,29 +75,30 @@
     <div class="container-cadProd">
         <main class="main-form"> 
             <section class="container-form">
-            <section class="left-form">
-                <div class="welcolme-prod">
-                    <p>Cadastrar Chave</p>
-                </div>
-                <div class="separator"></div>
-                <div class="last-midfont-login">
-                    <p>Cadastre uma chave no sistema</p>
-                </div>
-            </section> 
-            <section class="right-form">
-                <div class="form-login">
-                    <form method="POST">
-                        <label>*Chave de Administrador:</label>
-                        <input type="text" name="key_value" required><br>
+                <section class="left-form">
+                    <div class="welcolme-prod">
+                        <p>Cadastrar Chave</p>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="last-midfont-login">
+                        <p>Cadastre uma chave no sistema</p>
+                    </div>
+                </section> 
+                <section class="right-form">
+                    <div class="form-login">
+                        <form method="POST">
+                            <label>*Chave de Administrador:</label>
+                            <input type="text" name="key_value" required><br>
 
-                        <button type="submit" style="margin-top: 10px">Cadastrar</button>
-                        <?php
-                            if (isset($_GET['error_'])) {
-                                echo "<div style='margin: 20px 0;'>";
-                                echo "<span class='errors'>" . htmlspecialchars($_GET['message']) . "</span>";
-                                echo "</div>";
-                            }
-                        ?>
+                            <?php
+                                if (isset($_GET['error_'])) {
+                                    echo "<div style='margin: 20px 0;'>";
+                                    echo "<span class='errors'>" . htmlspecialchars($_GET['message']) . "</span>";
+                                    echo "</div>";
+                                }
+                            ?>
+
+                            <button type="submit" style="margin-top: 10px">Cadastrar</button>
                             <div class="voltar">
                                 <p><a href="admin.php">Voltar</a></p>
                             </div>
@@ -107,3 +108,4 @@
             </section>
         </main>
     </div>
+<?php include('../components/footer.php'); ?>

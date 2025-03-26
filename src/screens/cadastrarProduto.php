@@ -43,6 +43,13 @@
          * Verifica se foi enviado um arquivo
          */ 
         if (!empty($_FILES['imagem']['tmp_name'])) {
+            /**
+             * Define o tamanha da imagem em 2 MB
+             */
+            $maxSize = 2097152;
+            if ($_FILES['imagem']['size'] > $maxSize) {
+                notify('error', 'A imagem deve ter no máximo 2 MB.', 'cadastrarProduto');
+            }
             $imagem = file_get_contents($_FILES['imagem']['tmp_name']);
         }
 
@@ -83,15 +90,15 @@
     <div class="container-cadProd">
         <main class="main-form"> 
             <section class="container-form">
-            <section class="left-form">
-                <div class="welcolme-prod">
-                    <p>Cadastrar Produto</p>
-                </div>
-                <div class="separator"></div>
-                <div class="last-midfont-login">
-                    <p>Cadastre um produto no estoque</p>
-                </div>
-            </section>
+                <section class="left-form">
+                    <div class="welcolme-prod">
+                        <p>Cadastrar Produto</p>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="last-midfont-login">
+                        <p>Cadastre um produto no estoque</p>
+                    </div>
+                </section>
                 <section class="right-form">
                     <div class="form-login">
                         <form method="POST" enctype="multipart/form-data">
@@ -110,15 +117,15 @@
                             <label>Imagem:</label>
                             <input type="file" name="imagem" accept="image/*"><br><br>
 
-                            <button type="submit">Cadastrar</button>
-
                             <?php
                                 if (isset($_GET['error_'])) {
-                                    echo "<div style='margin: 20px 0;'>";
+                                    echo "<div style='margin-bottom: 20px;'>";
                                     echo "<span class='errors'>" . htmlspecialchars($_GET['message']) . "</span>";
                                     echo "</div>";
                                 }
                             ?>
+
+                            <button type="submit">Cadastrar</button>
 
                             <div class="voltar">
                                 <p><a href="admin.php">Voltar</a></p>
@@ -129,3 +136,4 @@
             </section>
         </main>
     </div>
+<?php include('../components/footer.php'); ?>
