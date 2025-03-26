@@ -30,7 +30,7 @@
 
    <div class="container">
       <div class="top-painel">
-         <h1 style="font-size: 2vw;">Bem-vindo, <?= $nomeUsuario ?> <?= $administrador ? "<p style='font-size: 1vw;'>(Administrador)</p>" : "" ?></h1>
+         <h1 style="font-size: 30px;">Bem-vindo, <?= $nomeUsuario ?> <?= $administrador ? "<p style='font-size: 20px;'>(Administrador)</p>" : "" ?></h1>
       
          <div class="logout">
             <a class="logout-content" href="../include/logout.php">
@@ -51,7 +51,7 @@
             
       <!-- Verifica se existem produtos cadastrados -->
       <?php if ($produtos): ?>
-         <h2 style='text-align: center; font-size: 1.7vw; margin-bottom: 10px'>Produtos Disponíveis</h2>
+         <h2 style='text-align: center; font-size: 25px; margin-bottom: 10px'>Produtos Disponíveis</h2>
          <div style='display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; overflow: hidden;'>
             <?php foreach ($produtos as $produto): ?>
                <!-- * Exibe cada produto com nome, descrição, valor e imagem -->
@@ -60,7 +60,7 @@
                   <?php if (!empty($produto['imagem'])): ?>
                      <img src="data:image/jpeg;base64,<?= base64_encode($produto['imagem']) ?>" width="100%" />
                   <?php endif; ?>
-                  <p style="font-size: 1.5rem; font-weight: 800; margin: 10px 0px 15px 0px; text-transform: uppercase;"><?= htmlspecialchars($produto['nomeProduto']) ?></p>
+                  <p class="card-title"><?= htmlspecialchars($produto['nomeProduto']) ?></p>
                   <p style="font-size: 1.4rem; font-weight: 800; margin: 0px 0px 16px 0px">R$ <?= number_format($produto['valor'], 2, ',', '.') ?></p>
                   <p class="card-description"><?= htmlspecialchars($produto['descricao']) ?></p>
                   <p style="font-size: 1rem; margin-top: 15px; margin-bottom: 15px; font-weight: 800;"><?= $produto['quantidade'] ?> Unidades</p>
@@ -68,7 +68,7 @@
             <?php endforeach; ?>
          </div>
       <?php else: ?>
-         <p style="text-align: center;">Nenhum produto disponível.</p>
+         <p style="text-align: center;" class="errors">Nenhum produto disponível.</p>
       <?php endif; ?>   
    </div>  
 <?php include('../components/footer.php'); ?>

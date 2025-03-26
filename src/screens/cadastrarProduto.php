@@ -73,6 +73,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="../public/boxIcon.png">
 </head>
+<?php
+    $nomeProduto_val = isset($_GET['nomeProduto']) ? htmlspecialchars($_GET['nomeProduto']) : '';
+    $descricao_val = isset($_GET['descricao']) ? htmlspecialchars($_GET['descricao']) : '';
+    $valor_val = isset($_GET['valor']) ? htmlspecialchars($_GET['valor']) : '';
+    $quantidade_val = isset($_GET['quantidade']) ? htmlspecialchars($_GET['quantidade']) : '';
+?>
 <body>
     <div class="container-cadProd">
         <main class="main-form"> 
@@ -86,18 +92,6 @@
                     <p>Cadastre um produto no estoque</p>
                 </div>
             </section>
-                <?php
-                    if (isset($_GET['error_'])) {
-                        echo "<div style='margin: 20px 0;'>";
-                        echo "<span class='errors'>" . htmlspecialchars($_GET['message']) . "</span>";
-                        echo "</div>";
-                    }
-
-                    $nomeProduto_val = isset($_GET['nomeProduto']) ? htmlspecialchars($_GET['nomeProduto']) : '';
-                    $descricao_val = isset($_GET['descricao']) ? htmlspecialchars($_GET['descricao']) : '';
-                    $valor_val = isset($_GET['valor']) ? htmlspecialchars($_GET['valor']) : '';
-                    $quantidade_val = isset($_GET['quantidade']) ? htmlspecialchars($_GET['quantidade']) : '';
-                ?>
                 <section class="right-form">
                     <div class="form-login">
                         <form method="POST" enctype="multipart/form-data">
@@ -117,6 +111,14 @@
                             <input type="file" name="imagem" accept="image/*"><br><br>
 
                             <button type="submit">Cadastrar</button>
+
+                            <?php
+                                if (isset($_GET['error_'])) {
+                                    echo "<div style='margin: 20px 0;'>";
+                                    echo "<span class='errors'>" . htmlspecialchars($_GET['message']) . "</span>";
+                                    echo "</div>";
+                                }
+                            ?>
 
                             <div class="voltar">
                                 <p><a href="admin.php">Voltar</a></p>

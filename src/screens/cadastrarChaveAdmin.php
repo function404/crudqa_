@@ -72,20 +72,38 @@
     <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="../public/boxIcon.png">
 </head>
 <body>
-    <h1>Cadastro de chave para criação de administradores</h1>    
-    <form method="POST">
-        <label>*Chave de Administrador:</label>
-        <input type="text" name="key_value" required><br>
+    <div class="container-cadProd">
+        <main class="main-form"> 
+            <section class="container-form">
+            <section class="left-form">
+                <div class="welcolme-prod">
+                    <p>Cadastrar Chave</p>
+                </div>
+                <div class="separator"></div>
+                <div class="last-midfont-login">
+                    <p>Cadastre uma chave no sistema</p>
+                </div>
+            </section> 
+            <section class="right-form">
+                <div class="form-login">
+                    <form method="POST">
+                        <label>*Chave de Administrador:</label>
+                        <input type="text" name="key_value" required><br>
 
-        <button type="submit">Cadastrar</button>
-    </form>
-    <?php
-        if (isset($_GET['error_'])) {
-            echo "<div style='margin: 20px 0;'>";
-            echo "<span class='errors'>" . htmlspecialchars($_GET['message']) . "</span>";
-            echo "</div>";
-        }
-    ?>
-
-    <p><a href="admin.php">Voltar</a></p>
-<?php include('../components/footer.php'); ?>
+                        <button type="submit" style="margin-top: 10px">Cadastrar</button>
+                        <?php
+                            if (isset($_GET['error_'])) {
+                                echo "<div style='margin: 20px 0;'>";
+                                echo "<span class='errors'>" . htmlspecialchars($_GET['message']) . "</span>";
+                                echo "</div>";
+                            }
+                        ?>
+                            <div class="voltar">
+                                <p><a href="admin.php">Voltar</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </section>
+        </main>
+    </div>
