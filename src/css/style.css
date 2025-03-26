@@ -55,6 +55,13 @@ header .logo img {
     text-transform: uppercase;
 }
 
+.errors {
+    padding: 10px;
+    border: 1px solid rgb(255, 56, 56);
+    /* border-radius: 4px; */
+    background-color: rgba(255, 56, 56, .1);
+    color: rgb(255, 56, 56);
+}
 /**
     * Painel CSS
     * 
@@ -69,20 +76,21 @@ header .logo img {
 .button-admin {
     display: flex;
     justify-content: flex-start;
-    width: 100%;
 }
 
 .button-admin-content {
-    justify-content: flex-start;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin: 1rem 0 2rem 0;
     padding: 5px 15px;
     background-color: rgb(56, 182, 255);
-    border-radius: 4px;
-    font-size: 1vw;
-    cursor: pointer;
-    margin: 1rem 0 2rem 0;
-    transition: ease-in-out 0.3s;
-    text-decoration: none;
     color: rgb(255, 255, 255);
+    font-size: 1vw;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: ease-in-out 0.3s;
 }
 
 .button-admin-content:hover {
@@ -90,14 +98,8 @@ header .logo img {
     color: rgb(255, 255, 255);
 }
 
-.button-admin-content a {
-    margin-right: 10px;
-    text-decoration: none;
-    color: inherit;
-}
-
 .button-admin-content i {
-    color: inherit;
+    margin-left: 15px;
 }
 
 .card-products {
@@ -137,33 +139,35 @@ header .logo img {
     padding: 10px;
 }
 
-.top-painel .sair {
+.top-painel .logout {
     display: flex;
     justify-content: center;
 }
 
-.top-painel .sair p{
-    width: 150px;
+.top-painel .logout a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 1rem 0rem 2rem 0rem;
     padding: 5px 15px;
     background-color: rgb(255, 56, 56);
     color: rgb(255, 255, 255);
-    border: none;
     border-radius: 4px;
-    text-align: center;
-    font-size: 1vw;
+    font-size: 20px; 
     cursor: pointer;
     transition: ease-in-out 0.3s;
+    box-sizing: border-box; 
     text-decoration: none;
 }
 
-.sair p:hover {
+.top-painel .logout a:hover {
     background-color: rgb(177, 15, 15);
     transition: ease-in-out 0.3s;
 }
 
-.sair a{
-    text-decoration: none;
-    color: rgb(255, 255, 255);
+.top-painel .logout i {
+    margin-left: 15px;
 }
 
 .top-painel {
@@ -171,6 +175,25 @@ header .logo img {
     justify-content: space-between;
     align-items: center;
     justify-items: center;
+}
+
+.card-title{
+    font-size: 1.5rem; 
+    font-weight: 800; 
+    margin: 10px 0px 15px 0px; 
+    text-transform: uppercase;
+    padding: 0 16px; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.card-title:hover {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
 }
 
 .card-description {
@@ -330,7 +353,7 @@ footer {
     border-right: 1px solid rgb(255, 255, 255);
     border-top: 1px solid rgb(255, 255, 255);
     border-bottom: 1px solid rgb(255, 255, 255);
-    padding: 0 1rem;
+    padding: 0 5px;
     font-size: 1.2rem;
 }
 
@@ -339,7 +362,7 @@ footer {
     background-color: rgb(238, 236, 236);
     outline: none;
     border-left: 5px solid rgb(15, 104, 177);
-    padding: 0 1rem;
+    padding: 0 5px;
     font-size: 1.2rem;
 }
 
@@ -380,6 +403,75 @@ footer {
 }
 
 /**
+    * Cadastro de produto CSS
+    * 
+    * Contém todo o CSS da página de cadastro de produto.
+    * 
+*/
+
+.container-cadProd .main-form .container-form .left-form .welcolme-prod p{
+    font-size: 3.5vw;
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    text-transform: uppercase;
+}
+
+.container-cadProd .main-form .container-form .right-form .form-login label {
+    margin-top: 0rem;
+}
+
+.container-cadProd .main-form .container-form .right-form .form-login textarea{
+    width: 100%;
+    height: 5rem;
+    background-color: rgb(238, 236, 236);
+    border-left: 5px solid rgb(56, 182, 255);
+    border-right: 1px solid rgb(255, 255, 255);
+    border-top: 1px solid rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(255, 255, 255);
+    resize: none;
+    padding: 0 5px;
+    font-size: 1.2rem;
+}
+
+.container-cadProd .main-form .container-form .right-form .form-login textarea:focus{
+    height: 5rem;
+    padding: 0 5px;
+    background-color: rgb(238, 236, 236);
+    outline: none;
+    border-left: 5px solid rgb(15, 104, 177);
+}
+
+.container-cadProd .main-form .container-form .right-form .form-login input[type="file"] {
+    background-color: #ffffff;
+    border: none;
+    margin-top: 5px;
+    font-size: 1.1rem;
+  }
+
+.container-cadProd .main-form .container-form .right-form button {
+    width: 50%;
+    padding: 5px 0;
+    background-color: rgb(56, 182, 255);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 30px;
+    font-size: 1.5vw;
+    cursor: pointer;
+    margin-top: 0rem;
+    transition: ease-in-out 0.3s;
+}
+
+.main-form .container-form .right-form button:hover {
+    background-color: rgb(15, 104, 177);
+    transition: ease-in-out 0.3s;
+}
+
+.container-cadProd .voltar {
+    margin-top: 15px;
+  }
+
+/**
     * Administrador CSS
     * 
     * Contém todo o CSS da página de administração.
@@ -388,40 +480,111 @@ footer {
 
 table {
     width: 100%;
-    border-collapse: collapse; 
-    margin: 20px 0; 
-    font-family: Arial, sans-serif; 
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 th {
-    background-color: rgb(56, 182, 255); 
-    color: white; 
-    text-align: center; 
-    padding: 12px 15px; 
-    font-weight: bold; 
-    max-width: 200px; /* Limite o tamanho máximo da célula */
-    overflow: hidden; /* Esconde o texto que ultrapassar */
-    text-overflow: ellipsis; /* Adiciona '...' se o texto for muito grande */
-    white-space: nowrap; /* Impede a quebra de linha */
+    background-color: rgb(56, 182, 255);
+    color: white;
+    text-align: center;
+    padding: 8px 10px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    max-width: 65px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 td {
-    padding: 12px 15px; 
-    text-align: left; 
-    border-bottom: 1px solid rgb(255, 255, 255); 
-    max-width: 200px; /* Limite o tamanho máximo da célula */
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-    white-space: nowrap; 
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid rgb(255, 255, 255);
+    max-width: 65px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     text-align: center;
+    font-size: 0.85rem;
+    transition: ease-in-out 0.3s;
+}
+
+td:hover {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 tr:nth-child(even) {
-    background-color: white; 
+    background-color: #f8f9fa;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
 }
 
 table, th, td {
-    border: 1px solid rgb(255, 255, 255); 
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.links {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.links .links-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 1rem 0rem 2rem 0rem;
+    padding: 5px 15px;
+    background-color: rgb(56, 182, 255);
+    color: rgb(255, 255, 255);
+    border-radius: 4px;
+    font-size: 20px; 
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+    box-sizing: border-box; 
+    text-decoration: none;
+}
+
+.links .links-content:hover {
+    background-color: rgb(15, 104, 177);
+    transition: ease-in-out 0.3s;
+}
+
+.links .links-content i {
+    margin-left: 15px;
+}
+
+.voltar {
+    display: flex;
+    justify-content: center;
+}
+
+.voltar a{
+    width: 150px;
+    padding: 5px 15px;
+    background-color: rgb(56, 182, 255);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 1vw;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+    text-decoration: none;
+}
+
+.voltar a:hover {
+    background-color: rgb(15, 104, 177);
+    transition: ease-in-out 0.3s;
 }
 
 
@@ -452,10 +615,90 @@ table, th, td {
     }
 }
 
-@media (max-width: 850px) {
-    .main-form {
-        height: 0dvh;
+@media (max-width: 910px) {
+    .container{
+        margin: 5rem 1.5rem;
     }
+
+    .container h1{
+        margin-bottom: 1rem;
+        font-size: 30px;
+    }
+    table, thead, tbody, th, td, tr {
+        display: block;
+        max-width: 100%;
+    }
+    
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    tr {
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    
+    td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 0.8rem;
+    }
+    
+    td:hover {
+        white-space: normal;
+        overflow: visible;
+    }
+    
+    td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 40%;
+        padding-right: 10px;
+        font-weight: bold;
+        text-align: left;
+        color: rgb(56, 182, 255);
+        font-size: 0.8rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .links {
+        display: block;
+        width: 100%;
+    }
+
+    .links .links-content {
+        display: flex;
+        justify-content: center;
+    }
+
+    .links .links-content p {
+        width: 100%; 
+        font-size: 20px;
+    }
+    
+    .links .links-content a {
+        margin-left: 0px;
+        font-size: 20px;
+    }
+        
+    .voltar {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 850px) {
 
     .main-form .container-form {
         display: block;
@@ -465,7 +708,7 @@ table, th, td {
     }
 
     .main-form .container-form .left-form{
-        height: 20vh;
+        height: 150px;
     }
 
     .main-form .container-form .left-form .separator,
@@ -488,7 +731,9 @@ table, th, td {
         text-transform: uppercase;
     }
     .main-form .container-form .right-form {
-        height: 80dvh;
+        height: auto;
+        padding: 15px 0 15px 0;
+        justify-content:flex-start;
     }
     .main-form .container-form .right-form .form-login {
         align-items: center;
@@ -500,6 +745,9 @@ table, th, td {
         font-size: 1rem;
         width: 45vw;
     }
+    .main-form .container-form .right-form .form-login input:focus{
+        font-size: 1rem;
+    }
     .main-form .container-form .right-form button {
         font-size: 2.7vw;
     }
@@ -509,6 +757,59 @@ table, th, td {
     .main-form .container-form .right-form button {
         width: 15rem;
     }
+
+    .top-painel .logout a{
+        font-size: 15px;
+    }
+
+    .container-cadProd .main-form .container-form .right-form .form-login textarea{
+        width: 100%;
+        height: 5rem;
+        background-color: rgb(238, 236, 236);
+        border-left: 5px solid rgb(56, 182, 255);
+        border-right: 1px solid rgb(255, 255, 255);
+        border-top: 1px solid rgb(255, 255, 255);
+        border-bottom: 1px solid rgb(255, 255, 255);
+        resize: none;
+        padding: 0 5px;
+        font-size: 1rem;
+    }
+    
+    .container-cadProd .main-form .container-form .right-form .form-login textarea:focus{
+        height: 5rem;
+        padding: 0 5px;
+        background-color: rgb(238, 236, 236);
+        outline: none;
+        border-left: 5px solid rgb(15, 104, 177);
+    }
+
+    .container-cadProd .main-form .container-form .right-form button {
+        width: 100%;
+        padding: 5px 0;
+        background-color: rgb(56, 182, 255);
+        color: rgb(255, 255, 255);
+        border: none;
+        border-radius: 30px;
+        font-size: 2vw;
+        cursor: pointer;
+        margin-top: 0rem;
+        transition: ease-in-out 0.3s;
+    }
+    
+    .container-cadProd .main-form .container-form .right-form button:hover {
+        background-color: rgb(15, 104, 177);
+        transition: ease-in-out 0.3s;
+    }
+
+    .container-cadProd .voltar a{
+        font-size: 2vw;
+    }
+    .container-cadProd .main-form .container-form .right-form .form-login input[type="file"] {
+        background-color: #ffffff;
+        border: none;
+        margin-top: 5px;
+        font-size: 0.9rem;
+      }
 }
 
 @media (max-width: 550px) {
@@ -533,6 +834,12 @@ table, th, td {
         width: 100%;
     }
     .main-form .container-form .right-form .register-login p{
+        font-size: 3vw;
+    }
+    .container-cadProd .main-form .container-form .right-form button {
+        font-size: 3vw;
+    }
+    .container-cadProd .voltar a{
         font-size: 3vw;
     }
 }

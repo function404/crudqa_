@@ -43,6 +43,13 @@
          * Verifica se foi enviado um arquivo
          */ 
         if (!empty($_FILES['imagem']['tmp_name'])) {
+            /**
+             * Define o tamanha da imagem em 2 MB
+             */
+            $maxSize = 2097152;
+            if ($_FILES['imagem']['size'] > $maxSize) {
+                notify('error', 'A imagem deve ter no máximo 2 MB.', 'cadastrarProduto');
+            }
             $imagem = file_get_contents($_FILES['imagem']['tmp_name']);
         }
 
@@ -71,37 +78,62 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <title>Cadastrar Produto | StockMaster</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="../public/boxIcon-white.png">
+    <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="../public/boxIcon.png">
 </head>
+<?php
+    $nomeProduto_val = isset($_GET['nomeProduto']) ? htmlspecialchars($_GET['nomeProduto']) : '';
+    $descricao_val = isset($_GET['descricao']) ? htmlspecialchars($_GET['descricao']) : '';
+    $valor_val = isset($_GET['valor']) ? htmlspecialchars($_GET['valor']) : '';
+    $quantidade_val = isset($_GET['quantidade']) ? htmlspecialchars($_GET['quantidade']) : '';
+?>
 <body>
-    <h1>Cadastrar Produto</h1>
-    <?php
-        if (isset($_GET['error_'])) {
-            echo "<p class='message' style='color: red;'>" . htmlspecialchars($_GET['message']) . "</p>";
-        }
+    <div class="container-cadProd">
+        <main class="main-form"> 
+            <section class="container-form">
+                <section class="left-form">
+                    <div class="welcolme-prod">
+                        <p>Cadastrar Produto</p>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="last-midfont-login">
+                        <p>Cadastre um produto no estoque</p>
+                    </div>
+                </section>
+                <section class="right-form">
+                    <div class="form-login">
+                        <form method="POST" enctype="multipart/form-data">
+                            <label>*Nome:</label>
+                            <input type="text" placeholder="Digite o nome" name="nomeProduto"value="<?php echo $nomeProduto_val; ?>" required><br><br>
 
-        $nomeProduto_val = isset($_GET['nomeProduto']) ? htmlspecialchars($_GET['nomeProduto']) : '';
-        $descricao_val = isset($_GET['descricao']) ? htmlspecialchars($_GET['descricao']) : '';
-        $valor_val = isset($_GET['valor']) ? htmlspecialchars($_GET['valor']) : '';
-        $quantidade_val = isset($_GET['quantidade']) ? htmlspecialchars($_GET['quantidade']) : '';
-    ?>
-    <form method="POST" enctype="multipart/form-data">
-        <label>*Nome:</label>
-        <input type="text" name="nomeProduto"value="<?php echo $nomeProduto_val; ?>" required><br><br>
+                            <label>*Descrição:</label>
+                            <textarea name="descricao" placeholder="Digite a descrição" value="<?php echo $descricao_val; ?>" required></textarea><br><br>
 
-        <label>*Descrição:</label>
-        <textarea name="descricao" value="<?php echo $descricao_val; ?>" required></textarea><br><br>
+                            <label>*Valor:</label>
+                            <input type="number" name="valor" placeholder="Digite o valor" step="0.01" value="<?php echo $valor_val; ?>" required><br><br>
 
-        <label>*Valor:</label>
-        <input type="number" name="valor" step="0.01" value="<?php echo $valor_val; ?>" required><br><br>
+                            <label>*Quantidade:</label>
+                            <input type="number" name="quantidade" placeholder="Digite a quantidade" min="1" max="99999" step="1" value="<?php echo $quantidade_val; ?>" required><br><br>
 
-        <label>*Quantidade:</label>
-        <input type="number" name="quantidade" min="1" max="99999" step="1" value="<?php echo $quantidade_val; ?>" required><br><br>
+                            <label>Imagem:</label>
+                            <input type="file" name="imagem" accept="image/*"><br><br>
 
-        <label>Imagem:</label>
-        <input type="file" name="imagem" accept="image/*"><br><br>
+                            <?php
+                                if (isset($_GET['error_'])) {
+                                    echo "<div style='margin-bottom: 20px;'>";
+                                    echo "<span class='errors'>" . htmlspecialchars($_GET['message']) . "</span>";
+                                    echo "</div>";
+                                }
+                            ?>
 
-        <button type="submit">Cadastrar</button>
-    </form>
-    <p><a href="admin.php">Voltar</a></p>
+                            <button type="submit">Cadastrar</button>
+
+                            <div class="voltar">
+                                <p><a href="admin.php">Voltar</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </section>
+        </main>
+    </div>
 <?php include('../components/footer.php'); ?>

@@ -52,7 +52,7 @@
         }
     } catch (PDOException $e) {
         /**
-         * Verifica se o erro é de duplicidade do email ou teledone único
+         * Verifica se o erro é de duplicidade do email ou telefone único
          */
         if ($e->errorInfo[1] == 1062) {
             /**
@@ -85,30 +85,53 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <title>Editar Usuário | StockMaster</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="../public/boxIcon-white.png">
+    <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="../public/boxIcon.png">
 </head>
 <body>
-    <h1>Editar Usuário</h1>
-    <form method="POST">
-        <label>*Nome:</label>
-        <input type="text" name="nomeUsuario" value="<?= $usuario['nomeUsuario'] ?>" required><br>
+    <div class="container-cadProd">
+        <main class="main-form">
+            <section class="container-form">
+                <section class="left-form">
+                    <div class="welcolme-prod">
+                        <p>Editar Usuário</p>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="last-midfont-login">
+                        <p>Edite o usuário no estoque</p>
+                    </div>
+                </section>
+                <section class="right-form">
+                    <div class="form-login">
+                        <form method="POST">
+                            <label>*Nome:</label>
+                            <input type="text" name="nomeUsuario" value="<?= $usuario['nomeUsuario'] ?>" required><br><br>
 
-        <label>*Email: </label>
-        <input type="email" name="email" value="<?= $usuario['email'] ?>" required><br>
+                            <label>*Email: </label>
+                            <input type="email" name="email" value="<?= $usuario['email'] ?>" required><br><br>
 
-        <label>Telefone: </label>
-        <input type="text" name="telefone" value="<?= $usuario['telefone'] ?>"><br>
-        
-        <button type="submit">Salvar Alterações</button>
-    </form>
-    <p><a href="admin.php">Voltar</a></p>
-    
-    <?php
-    /**
-     * Exibe a mensagem de erro, se existir
-     */
-    if (isset($errorMessage)) {
-        echo "<p style='color:red;'>$errorMessage</p>";
-    }
-    ?>
+                            <label>Telefone: </label>
+                            <input type="text" name="telefone" value="<?= $usuario['telefone'] ?>"><br><br>
+                            
+                            <?php
+                                /**
+                                 * Exibe a mensagem de erro, se existir
+                                 */
+                                if (isset($errorMessage)) {
+                                    echo "<div style='margin: 20px 0;'>";
+                                    echo "<span class='errors'>$errorMessage</span>";
+                                    echo "</div>";
+                                }
+                            ?>
+
+                            <button type="submit">Salvar</button>
+
+                            <div class="voltar">
+                                <p><a href="admin.php">Voltar</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </section>
+        </main>
+    </div>
 <?php include('../components/footer.php'); ?>

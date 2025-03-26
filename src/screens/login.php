@@ -76,17 +76,7 @@
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <title>Login | StockMaster</title>
    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap" rel="stylesheet">
-   <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="../public/boxIcon-white.png" id="favicon">
-   <!-- <script>
-      function updateFavicon() {
-         const favicon = document.getElementById("favicon");
-         const darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-         favicon.href = darkMode ? "boxIcon-black.png" : "boxIcon-white.png";
-      }
-
-      updateFavicon();
-      window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateFavicon);
-   </script> -->
+   <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="../public/boxIcon.png" id="favicon">
 </head>
 <?php
    $email_val = isset($_GET["email"]) ? htmlspecialchars($_GET["email"]) : "";
@@ -126,10 +116,9 @@
                   
                   <?php
                      if (isset($_GET["error_"])) {
-                        echo "<p style='color: red; margin-top:15px; font-size: 1vw;'>" . htmlspecialchars($_GET["message"]) . "</p>";
-                     }
-                     if (isset($_GET["success_"])) {
-                        echo "<p style='color: red; margin-top:15px; font-size: 1vw;'>" . htmlspecialchars($_GET["message"]) . "</p>";
+                        echo "<div style='margin-top: 20px;'>";
+                           echo "<span class='errors'>" . htmlspecialchars($_GET['message']) . "</span>";
+                        echo "</div>";
                      }
                   ?>
                   <button type="submit">Entrar</button>

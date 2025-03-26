@@ -60,6 +60,13 @@
          * Verifica se uma nova imagem foi enviada
          */ 
         if (!empty($_FILES['imagem']['tmp_name'])) {
+            /**
+             * Define o tamanha da imagem em 2 MB
+             */
+            $maxSize = 2097152;
+            if ($_FILES['imagem']['size'] > $maxSize) {
+                notify('error', 'A imagem deve ter no máximo 2 MB.', 'editarProduto', ['idProduto' => $idProduto]);
+            }
             $imagem = file_get_contents($_FILES['imagem']['tmp_name']);
             $sql = $pdo->prepare("UPDATE produto SET nomeProduto=?, descricao=?, valor=?, quantidade=?, imagem=? WHERE idProduto=?");
             $sql->execute([$nomeProduto, $descricao, $valor, $quantidade, $imagem, $idProduto]);
@@ -90,40 +97,63 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <title>Editar Produto | StockMaster</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="../public/boxIcon-white.png">
+    <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="../public/boxIcon.png">
 </head>
 <body>
-    <h1>Editar Produto</h1>
-    <form method="post" enctype="multipart/form-data">
-        <label>*Nome:</label>
-        <input type="text" name="nomeProduto" value="<?= $produto['nomeProduto'] ?>" required><br><br>
-
-        <label>*Descrição:</label>
-        <textarea name="descricao" required><?= $produto['descricao'] ?></textarea><br><br>
-
-        <label>*Valor:</label>
-        <input type="number" name="valor" step="0.01" value="<?= $produto['valor'] ?>" required><br><br>
-
-        <label>*Quantidade:</label>
-        <input type="number" name="quantidade" step="1"  min="1" max="99999" value="<?= $produto['quantidade'] ?>" required><br><br>
-
-        <label>Imagem Atual:</label><br>
-        <?php if (!empty($produto['imagem'])): ?>
-            <img src="data:image/jpeg;base64,<?= base64_encode($produto['imagem']) ?>" width="100"><br><br>
-        <?php else: ?>
-            <p>Sem imagem cadastrada</p>
-        <?php endif; ?>
-
-        <label>Nova Imagem:</label>
-        <input type="file" name="imagem" accept="image/*"><br><br>
-
-        <?php
-            if (isset($_GET['error_'])) {
-                echo "<p style='color:red;'>" . htmlspecialchars($_GET['message']) . "</p>";
-            }
-        ?>
-
-        <button type="submit">Salvar Alterações</button>
-    </form>
-    <p><a href="admin.php">Voltar</a></p>
+    <div class="container-cadProd">
+        <main class="main-form">
+            <section class="container-form">
+                <section class="left-form">
+                    <div class="welcolme-prod">
+                        <p>Editar Produto</p>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="last-midfont-login">
+                        <p>Edite o produto no estoque</p>
+                    </div>
+                </section>
+                <section class="right-form">
+                    <div class="form-login">
+                        <form method="post" enctype="multipart/form-data">
+                            <label>*Nome:</label>
+                            <input type="text" name="nomeProduto" value="<?= $produto['nomeProduto'] ?>" required><br><br>
+                    
+                            <label>*Descrição:</label>
+                            <textarea name="descricao" required><?= $produto['descricao'] ?></textarea><br><br>
+                    
+                            <label>*Valor:</label>
+                            <input type="number" name="valor" step="0.01" value="<?= $produto['valor'] ?>" required><br><br>
+                    
+                            <label>*Quantidade:</label>
+                            <input type="number" name="quantidade" step="1"  min="1" max="99999" value="<?= $produto['quantidade'] ?>" required><br><br>
+                    
+                            <label>Imagem Atual:</label><br>
+                            <?php if (!empty($produto['imagem'])): ?>
+                                <img src="data:image/jpeg;base64,<?= base64_encode($produto['imagem']) ?>" width="100"><br><br>
+                            <?php else: ?>
+                                <p>Sem imagem cadastrada</p><br>
+                            <?php endif; ?>
+                    
+                            <label>Nova Imagem:</label>
+                            <input type="file" name="imagem" accept="image/*">
+                    
+                            <?php
+                                if (isset($_GET['error_'])) {
+                                    echo "<div style='margin: 20px 0;'>";
+                                    echo "<span class='errors'>" . htmlspecialchars($_GET['message']) . "</span>";
+                                    echo "</div>";
+                                }
+                            ?>
+                    
+                            <button type="submit">Salvar</button>
+    
+                            <div class="voltar">
+                                <p><a href="admin.php">Voltar</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </section>
+        </main>
+    </div>
 <?php include('../components/footer.php'); ?>
