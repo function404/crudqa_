@@ -97,7 +97,7 @@
                     </div>
                     <div class="separator"></div>
                     <div class="last-midfont-login">
-                        <p>Edite o usuário no estoque</p>
+                        <p>Edite o usuário cadastrado</p>
                     </div>
                 </section>
                 <section class="right-form">
